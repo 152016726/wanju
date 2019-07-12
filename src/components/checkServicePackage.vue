@@ -380,8 +380,8 @@
 
     .serviceTable {
       display: table;
-      border-top: 1Px solid #DDDDDD;
-      border-left: 1Px solid #DDDDDD;
+      border-top: 1px solid #DDDDDD;
+      border-left: 1px solid #DDDDDD;
       background-color: #ffffff;
 
       .serviceTableCell {
@@ -389,17 +389,17 @@
         text-align: center;
         vertical-align: middle;
         display: table-cell;
-        border-right: 1Px solid #DDDDDD;
+        border-right: 1px solid #DDDDDD;
         border-collapse: collapse;
 
         &.borderBottom {
-          border-bottom: 1Px solid #DDDDDD;
+          border-bottom: 1px solid #DDDDDD;
         }
 
         > div {
           height: 50px;
           line-height: 50px;
-          border-bottom: 1Px solid #DDDDDD;
+          border-bottom: 1px solid #DDDDDD;
           box-sizing: border-box;
         }
 
@@ -412,7 +412,7 @@
         .serviceTableCell {
           height: 38px;
           line-height: 38px;
-          border-bottom: 1Px solid #DDDDDD;
+          border-bottom: 1px solid #DDDDDD;
         }
 
         .index {

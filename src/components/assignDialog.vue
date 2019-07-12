@@ -41,7 +41,7 @@
           <el-button v-if="healthStatus === 0" type="primary" class="major" @click.prevent.stop="toggleHealthDialog">
             通过
           </el-button>
-          <el-button v-if="healthStatus === 0" type="danger" @click.prevent.stop="toggleRejctDialog">拒绝</el-button>
+          <el-button v-if="healthStatus === 0" class="refuse" type="danger" @click.prevent.stop="toggleRejctDialog">拒绝</el-button>
           <span v-if="healthStatus === 1" class="established">已建立健康档案</span>
           <span v-if="healthStatus === 2" class="refused">已拒绝健康档案</span>
         </div>
@@ -60,22 +60,22 @@
         </div>
         <commonAreaSelector
           :text="'现住地址'"
-          :province.sync="PROVINCEDID"
-          :city.sync="CITYID"
-          :area.sync="DISTRICTID"
-          :street.sync="STREETID"
-          :village.sync="COMMITTEEID"
+          :province.sync="isDisabledFamily || isHandleFamily ? PROVINCEDNAME : PROVINCEDID"
+          :city.sync="isDisabledFamily || isHandleFamily ? CITYNAME : CITYID"
+          :area.sync="isDisabledFamily || isHandleFamily ? DISTRICTNAME : DISTRICTID"
+          :street.sync="isDisabledFamily || isHandleFamily ? STREETNAME : STREETID"
+          :village.sync="isDisabledFamily || isHandleFamily ? COMMITTEENAME : COMMITTEEID"
           :address.sync="XXDZ"
           :isDisabled="isDisabledFamily || isHandleFamily"
         >
         </commonAreaSelector>
         <commonAreaSelector
           :text="'网格地址'"
-          :province.sync="PROVINCEDID"
-          :city.sync="CITYID"
-          :area.sync="DISTRICTID"
-          :street.sync="STREETID"
-          :village.sync="COMMITTEEID"
+          :province.sync="isDisabledFamily || isHandleFamily ? PROVINCEDNAME : PROVINCEDID"
+          :city.sync="isDisabledFamily || isHandleFamily ? CITYNAME : CITYID"
+          :area.sync="isDisabledFamily || isHandleFamily ? DISTRICTNAME : DISTRICTID"
+          :street.sync="isDisabledFamily || isHandleFamily ? STREETNAME : STREETID"
+          :village.sync="isDisabledFamily || isHandleFamily ? COMMITTEENAME : COMMITTEEID"
           :address.sync="XXDZ"
           :isDisabled="isDisabledFamily || isHandleFamily"
         >
@@ -94,7 +94,7 @@
         <!--<div class="btns" v-if="sign_audit">-->
           <el-button v-if="familyStatus === 0" type="primary" class="major" @click.prevent.stop="toggleHomeDialog">通过
           </el-button>
-          <el-button v-if="familyStatus === 0" type="danger" @click.prevent.stop="toggleRejctFamilyDialog">拒绝
+          <el-button v-if="familyStatus === 0" class="refuse" type="danger" @click.prevent.stop="toggleRejctFamilyDialog">拒绝
           </el-button>
           <span v-if="familyStatus === 1" class="established">已建立家庭档案</span>
           <span v-if="familyStatus === 2" class="refused">已拒绝家庭档案</span>
@@ -110,6 +110,12 @@
           v-for="(item, index) in familyInfo.QYCYXQ.QYMXLBList"
           :key="index"
           :signerInfo="item"
+          :QYID="QYID"
+          :index="index"
+          :orderStatus="item.ORDERSTATUS"
+          @initData="initData"
+          @closeDialog="closeContent"
+          @setSignStatus="setSignStatus"
           :title="index === 0 ? '户主信息' : '签约成员'+(index+1)"
         >
         </assignSigner>
@@ -117,7 +123,11 @@
           :isShowSign="sign_audit"
           :signerInfo="familyInfo.QYCYXQ"
           :signStatus="signStatus"
+          :QYID="QYID"
           @setEvent="toggleSign"
+          @setSignStatus="setSignStatus"
+          @initData="initData"
+          @closeDialog="closeContent"
         >
         </assignSignerInfo>
       </div>
@@ -230,10 +240,15 @@
         APPROVAL_LIST,
         sign_audit: false,                                                         //  签约详情审核权限
         PROVINCEDID: '',                                                           // 户主地址省ID
+        PROVINCEDNAME: '',                                                         // 户主地址省名称
         CITYID: '',                                                                // 户主地址市ID
+        CITYNAME: '',                                                              // 户主地址市名称
         DISTRICTID: '',                                                            // 户主地址区ID
+        DISTRICTNAME: '',                                                          // 户主地址区名称
         STREETID: '',                                                              // 户主地址街道ID
+        STREETNAME: '',                                                            // 户主地址街道名称
         COMMITTEEID: '',                                                           // 户主地址村ID
+        COMMITTEENAME: '',                                                         // 户主地址村名称
         XXDZ: ''                                                                   // 户主地址详细地址
       }
     },
@@ -252,15 +267,11 @@
       ORDERSTATUS: {default: ''},        // 签约单状态
       JTID: {default: ''},          // 家庭id
       QYID: {default: ''},          // 签约id
-      ISFAMILYRECORDAUDITED: {default: ''},   // 家庭健康档案
-      ISMEMBERRECORDAUDITED: {default: ''},   // 家庭成员档案
       toggleMainContent: {},        // 内容的显示隐藏切换函数
     },
     created() {
       // 请求接口获取健康档案状态，家庭档案状态，签约信息状态， 从而重置healthStatus，isDisabledHealths/ familyStatus, isDisabledFamily /
-      const {JTID, ORDERSTATUS, ISFAMILYRECORDAUDITED, ISMEMBERRECORDAUDITED} = this;
-      this.healthStatus = ISFAMILYRECORDAUDITED;
-      this.familyStatus = ISMEMBERRECORDAUDITED;
+      const {ORDERSTATUS} = this;
       this.signStatus = ORDERSTATUS;
       let authObj = JSON.parse(this.$localStore.getItem('authority'));
       // 初始化查看详情权限
@@ -269,29 +280,16 @@
       this.isDisabledHealths = !flag;
       this.isDisabledFamily = !flag;
       this.isDisabledSign = !flag;
-      this.$post('family/sign/order/getOrderDetails', {
-        JTID
-      }).then(rsp => {
-        this.familyInfo = rsp.data;
-        const {JDJGMC, GDJGMC, JDRMC, ZRYSMC, PROVINCEDID, CITYID, DISTRICTID, STREETID, COMMITTEEID, XXDZ} = rsp.data;
-        this.JDJGMC = JDJGMC;
-        this.GDJGMC = GDJGMC;
-        this.JDRMC = JDRMC;
-        this.ZRYSMC = ZRYSMC;
-        this.PROVINCEDID = PROVINCEDID;
-        this.CITYID = CITYID;
-        this.DISTRICTID = DISTRICTID;
-        this.STREETID = STREETID;
-        this.COMMITTEEID = COMMITTEEID;
-        this.XXDZ = XXDZ;
-      }, rej => {
-        if(rej.data.errcode === 460){
-            this.$message.error(rej.data.datas[0].message);
-          }else{
-            this.$message.error(rej.data.errmsg);
-          }})
+      this.initData();
     },
     methods: {
+      /**
+       * 设定signStatus
+       * @param val type:number
+       */
+      setSignStatus(val){
+        this.signStatus = val;
+      },
       /**
        * toggle显示档案信息的点击事件
        * @param index
@@ -303,7 +301,7 @@
        * 关闭弹窗
        */
       closeContent() {
-        this.toggleMainContent(1)
+        this.toggleMainContent(-1)
       },
       /**
        * 审核健康档案
@@ -319,13 +317,8 @@
           this.healthStatus = val;
           // 阻止健康档案再次修改
           this.isDisabledHealths = true;
-          // 拒绝弹窗
-          if(val === 2)this.toggleRejctDialog(-1);
-          // 通过弹窗
-          if(val === 1){
-            this.toggleHealthDialog(-1);
-            this.activeIndex = 1;
-          }
+          this.toggleHealthDialog(-1);
+          this.initData()
         }, rej => {
           if(rej.data.errcode === 460){
             this.$message.error(rej.data.datas[0].message);
@@ -370,13 +363,8 @@
           this.familyStatus = val;
           // 阻止家庭健康档案修改
           this.isDisabledFamily = true;
-          // 拒绝
-          if(val === 2)this.toggleRejctFamilyDialog(-1);
-          // 通过
-          if(val === 1){
-            this.toggleHomeDialog(-1);
-            this.activeIndex = 2;
-          }
+          this.toggleHomeDialog(-1);
+          this.initData()
         }, rej => {
           if(rej.data.errcode === 460){
             this.$message.error(rej.data.datas[0].message);
@@ -421,7 +409,8 @@
           this.signStatus = obj.val;
           // 阻止签约信息修改
           this.isDisabledSign = true;
-          obj.callback()
+          obj.callback();
+          this.initData()
         }, rej => {
           if(rej.data.errcode === 460){
             this.$message.error(rej.data.datas[0].message);
@@ -451,11 +440,69 @@
           this.isShowHomeFile = !this.isShowHomeFile;
         }
       },
+      initData(){
+        const {JTID, ORDERSTATUS, QYID} = this;
+        this.$post('family/sign/order/getOrderDetails', {
+          JTID, QYID
+        }).then(rsp => {
+          this.familyInfo = rsp.data;
+          const {JDJGMC, GDJGMC, JDRMC, ZRYSMC, PROVINCEDID, CITYID, DISTRICTID, STREETID, COMMITTEEID, XXDZ, FAMILYRECORDAUDITED, MEMBERRECORDAUDITED, PROVINCEDNAME, CITYNAME, DISTRICTNAME, STREETNAME, COMMITTEENAME} = rsp.data;
+          this.JDJGMC = JDJGMC;
+          this.GDJGMC = GDJGMC;
+          this.JDRMC = JDRMC;
+          this.ZRYSMC = ZRYSMC;
+          this.PROVINCEDID = PROVINCEDID;
+          this.PROVINCEDNAME = PROVINCEDNAME;
+          this.CITYID = CITYID;
+          this.CITYNAME = CITYNAME;
+          this.DISTRICTID = DISTRICTID;
+          this.DISTRICTNAME = DISTRICTNAME;
+          this.STREETID = STREETID;
+          this.STREETNAME = STREETNAME;
+          this.COMMITTEEID = COMMITTEEID;
+          this.COMMITTEENAME = COMMITTEENAME;
+          this.XXDZ = XXDZ;
+          this.healthStatus = MEMBERRECORDAUDITED;
+          this.familyStatus = FAMILYRECORDAUDITED;
+          if(MEMBERRECORDAUDITED === 0){
+            this.activeIndex = 0;
+          }else if(FAMILYRECORDAUDITED === 0){
+            this.activeIndex = 1;
+          }else if(ORDERSTATUS === 0){
+            this.activeIndex = 2;
+          }else{
+            this.activeIndex = 0;
+          }
+        }, rej => {
+          if(rej.data.errcode === 460){
+            this.$message.error(rej.data.datas[0].message);
+          }else{
+            this.$message.error(rej.data.errmsg);
+          }})
+      }
     }
   }
 </script>
 
 <style lang="scss">
+  @media screen and (max-width: 1300px){
+    .createHomeFile{
+      .baseInfo{
+        .commonTextInput .commonTextInputContent .inputType{
+          width: 175px;
+        }
+      }
+      .commonAreaSelector .address{
+        .commonTextInput .commonTextInputContent .inputType{
+          width: 210px;
+        }
+      }
+     .commonAreaSelector .areaSelectorTitle{
+        width: 90px;
+       text-align: right;
+      }
+    }
+  }
   $border: 1px solid #DDDDDD;
   .assignDialog {
     width: 1354px;
@@ -532,6 +579,10 @@
 
           .major {
             margin-right: 20px !important;
+            background-color: #4486ff;
+          }
+          .refuse{
+            background-color: #f65860;
           }
 
           .el-button {
@@ -545,7 +596,7 @@
       }
 
       .assignBaseInfo {
-        border-top: 1Px solid #DDDDDD;
+        border-top: 1px solid #DDDDDD;
       }
 
       .createHomeFile {
@@ -598,6 +649,10 @@
 
           .major {
             margin-right: 20px;
+            background-color: #4486ff;
+          }
+          .refuse{
+            background-color: #f65860;
           }
         }
       }

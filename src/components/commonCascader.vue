@@ -71,18 +71,12 @@
 
 
               // 二联判断赋值
-              console.log(val[1], 'val[1]');
               if (val[1]) {
-                // if(this.roleType === cityMember){
-                //   return true
-                // }
-                console.log(item.children, 'item.children');
                 item.children.some(k => {
                   if(this.roleType === cityMember) {
                     delete k.children;
                     return false
                   }else{
-                    console.log(333);
                     if (k.value === val[1]) {
                       if (!k.children.length) {
                         this.getRegion(val[1], (data)=>{
@@ -164,6 +158,7 @@
       margin-left: 10px;
       width: 200px;
       height: 30px;
+      font-size: 16px;
       line-height: 30px;
     }
 
@@ -171,6 +166,25 @@
       border: 1px solid #DDDDDD;
       text-indent: 8px;
       box-sizing: border-box;
+      &::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: #BABABA;
+      }
+
+      &:-moz-placeholder, textarea:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: #BABABA;
+      }
+
+      &::-moz-placeholder, textarea::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: #BABABA;
+      }
+
+      &:-ms-input-placeholder, textarea:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: #BABABA;
+      }
     }
 
     .el-input__inner {

@@ -1,13 +1,39 @@
+// 兼容1024屏幕
+@media screen and (max-width: 1300px){
+  .signManage .filterCondition .item, .signManage .filterCondition .col-1{
+    .commonTextInput, .commonDatePicker, .commonSelector{
+      .iconText{
+        width: 135px;
+      }
+      .inputType, .datepicker, .selection{
+        width: 170px;
+      }
+    }
+  }
+}
 .signManage{
   padding: 30px 20px 10px 20px;
-  background-color: #F0F2F5;
   height: 100%;
   box-sizing: border-box;
+  .flexBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    height: 100%;
+    box-sizing: border-box;
+  }
   .topSpecial{
     display: flex;
+    background-color: #F0F2F5;
     .commonTextInput{
       margin-left: 45px;
     }
+  }
+  .pagination{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
   }
   .tag {
     cursor: pointer;
@@ -31,33 +57,7 @@
     }
   }
   .filterCondition{
-    .item{
-      .btns{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-bottom: 20px;
-        .el-button{
-          width: 86px;
-          height: 30px;
-          line-height: 30px;
-          font-size: 16px;
-          padding: 0 0;
-        }
-      }
-      .major{
-        margin-right: 20px;
-      }
-      .datepicker, .inputType{
-        width: 180px;
-      }
-      .selection{
-        width: 175px;
-      }
-    }
-    .iconText{
-      text-align: right;
-    }
+    background-color: #F0F2F5;
     .col-1, .col-2{
       margin-right: 12px;
       .iconText{
@@ -82,6 +82,34 @@
         width: 110px;
       }
     }
+    .item{
+      .btns{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 20px;
+        .el-button{
+          width: 86px;
+          height: 30px;
+          line-height: 30px;
+          font-size: 16px;
+          padding: 0 0;
+        }
+      }
+      .major{
+        margin-right: 20px;
+        background-color: #4486ff;
+      }
+      .datepicker, .inputType{
+        width: 200px;
+      }
+      .selection{
+        width: 200px;
+      }
+    }
+    .iconText{
+      text-align: right;
+    }
   }
   .signList{
     width: 100%;
@@ -92,12 +120,6 @@
     background-color: #ffffff;
     box-sizing: border-box;
     position: relative;
-
-    .pagination{
-      display: flex;
-      justify-content: center;
-      padding: 10px 0;
-    }
 
     .noneData{
       text-align: center;
@@ -201,9 +223,9 @@
       //  }
       //}
       .signDate{
-        width: 115px;
+        width: 124px;
         >div{
-          width: 115px;
+          width: 124px;
         }
       }
       .approvalDate{

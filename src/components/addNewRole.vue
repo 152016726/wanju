@@ -165,6 +165,13 @@
 </script>
 
 <style lang="scss" scoped>
+  @media screen and (max-width: 1300px){
+    .addNewRoleContent .inputContent{
+      .commonTextInput{
+        margin-right: 40px!important;
+      }
+    }
+  }
   .addNewRole {
     .addNewRoleTitle {
       width: 100%;
@@ -193,7 +200,7 @@
       .inputContent {
         display: flex;
 
-        .commonTextInput, .commonSelector {
+        .commonTextInput {
           margin-right: 45px;
         }
       }
@@ -208,23 +215,23 @@
       .authorityHead {
         display: flex;
         background-color: #F3F3F3;
-        border-top: 1Px solid #DDDDDD;
-        border-left: 1Px solid #DDDDDD;
+        border-top: 1px solid #DDDDDD;
+        border-left: 1px solid #DDDDDD;
 
         .authorityCell {
           height: 38px;
           line-height: 38px;
           text-align: center;
           font-size: 16px;
-          border-right: 1Px solid #DDDDDD;
-          border-bottom: 1Px solid #DDDDDD;
+          border-right: 1px solid #DDDDDD;
+          border-bottom: 1px solid #DDDDDD;
           box-sizing: border-box;
         }
       }
 
       .authorityTable {
         display: table;
-        border-left: 1Px solid #DDDDDD;
+        border-left: 1px solid #DDDDDD;
         border-collapse: collapse;
       }
     }
@@ -316,7 +323,7 @@
     }
 
     .borderBottom {
-      border-bottom: 1Px solid #DDDDDD;
+      border-bottom: 1px solid #DDDDDD;
     }
   }
 </style>

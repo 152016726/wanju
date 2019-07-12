@@ -103,8 +103,8 @@
       text-align: center;
       vertical-align: middle;
       font-size: 16px;
-      border-bottom: 1Px solid #DDDDDD;
-      border-right: 1Px solid #DDDDDD;
+      border-bottom: 1px solid #DDDDDD;
+      border-right: 1px solid #DDDDDD;
       box-sizing: border-box;
     }
     .handleAuthority{

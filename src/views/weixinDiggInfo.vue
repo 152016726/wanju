@@ -1,80 +1,83 @@
 <template>
   <div class="weixinDiggInfo">
-    <div class="weixinDiggSearch">
-      <commonTextInput :text="'机构名称'" v-model="orgName"></commonTextInput>
-      <commonTextInput :text="'公众号名称'" v-model="appName"></commonTextInput>
-      <commonTextInput :text="'主题'" v-model="title"></commonTextInput>
-      <commonSelector :text="'板块'" v-model="category" :options="categoryList"></commonSelector>
-
-    </div>
-    <div class="weixinDiggTime clearfix">
-     <div class="filterTime fl">
-       <commonDatePicker :text="'起始时间'" :placeholderText="'请选择时间'" :pickerOptions="beginPickerOptions" v-model="beginPubTime"></commonDatePicker>
-       <commonDatePicker :text="'结束时间'" :placeholderText="'请选择时间'" :pickerOptions="endPickerOptions" v-model="endPubTime"></commonDatePicker>
-     </div>
-      <el-button type="primary" class="major fr" @click.prevent.stop="searchDiggInfo">查询</el-button>
-    </div>
-    <div class="weixinDiggContent">
-      <div class="personTitle">
-        <p class="title">资讯列表</p>
-        <div class="functionBtns">
-          <el-button type="primary" class="major" v-if="wx_news_add" @click.stop.prevent="openDiggInfo('')">新增
-          </el-button>
+    <div class="flexBox">
+      <div>
+        <div class="weixinDiggSearch">
+          <commonTextInput :text="'机构名称'" v-model="orgName"></commonTextInput>
+          <commonTextInput :text="'公众号名称'" v-model="appName"></commonTextInput>
+          <commonTextInput :text="'主题'" v-model="title"></commonTextInput>
+          <commonSelector :text="'板块'" v-model="category" :options="categoryList"></commonSelector>
         </div>
-      </div>
-      <div class="personContent">
-        <div class="personTable">
-          <div class="tableHeader">
-            <div class="tableCell index">序号</div>
-            <div class="tableCell name">机构名称</div>
-            <div class="tableCell code">公众号名称</div>
-            <div class="tableCell organization">主题</div>
-            <div class="tableCell leader">板块</div>
-            <div class="tableCell count">阅读</div>
-            <div class="tableCell state">点赞</div>
-            <div class="tableCell provide">发布时间</div>
-            <div class="tableCell handle">操作</div>
+        <div class="weixinDiggTime clearfix">
+          <div class="filterTime fl">
+            <commonDatePicker :text="'起始时间'" :placeholderText="'请选择时间'" :pickerOptions="beginPickerOptions" v-model="beginPubTime"></commonDatePicker>
+            <commonDatePicker :text="'结束时间'" :placeholderText="'请选择时间'" :pickerOptions="endPickerOptions" v-model="endPubTime"></commonDatePicker>
           </div>
-          <div class="filterDate"></div>
-          <div class="tableRow" v-for="(item, index) in dataList" :key="index">
-            <div class="tableCell">{{index+1}}</div>
-            <div class="tableCell">{{item.category === 0 ? '所有版块' : item.orgName}}</div>
-            <div class="tableCell">{{item.category === 0 ? '所有公众号' : item.appName}}</div>
-            <div class="tableCell">{{item.title}}</div>
-            <div class="tableCell">{{item.category}}</div>
-            <div class="tableCell">{{item.readingNumber}}</div>
-            <div class="tableCell">{{item.approveNumber}}</div>
-            <div class="tableCell">{{item.createTime}}</div>
-            <div class="tableCell">
-              <el-button type="primary" class="major" v-if="wx_news_edit"
-                         @click.prevent.stop="setTopState(item.newsId, !item.isSticky)">{{item.isSticky ? '取消置顶' :
-                '置顶'}}
+          <el-button type="primary" class="major fr" @click.prevent.stop="searchDiggInfo">查询</el-button>
+        </div>
+        <div class="weixinDiggContent">
+          <div class="personTitle">
+            <p class="title">资讯列表</p>
+            <div class="functionBtns">
+              <el-button type="primary" class="major" v-if="wx_news_add" @click.stop.prevent="openDiggInfo('')">新增
               </el-button>
-              <el-button type="primary" class="major" v-if="wx_news_edit"
-                         @click.prevent.stop="openDiggInfo(item.newsId)">编辑
-              </el-button>
-              <el-button type="danger" class="major" v-if="wx_news_delete"
-                         @click.prevent.stop="deleteDiggInfo(item.newsId)">删除
-              </el-button>
-              <span v-if="!wx_news_edit && !wx_news_delete">暂无编辑权限</span>
+            </div>
+          </div>
+          <div class="personContent">
+            <div class="personTable">
+              <div class="tableHeader">
+                <div class="tableCell index">序号</div>
+                <div class="tableCell name">机构名称</div>
+                <div class="tableCell code">公众号名称</div>
+                <div class="tableCell organization">主题</div>
+                <div class="tableCell leader">板块</div>
+                <div class="tableCell count">阅读</div>
+                <div class="tableCell state">点赞</div>
+                <div class="tableCell provide">发布时间</div>
+                <div class="tableCell handle">操作</div>
+              </div>
+              <div class="filterDate"></div>
+              <div class="tableRow" v-for="(item, index) in dataList" :key="index">
+                <div class="tableCell">{{index+1}}</div>
+                <div class="tableCell">{{item.category === 0 ? '所有版块' : item.orgName}}</div>
+                <div class="tableCell">{{item.category === 0 ? '所有公众号' : item.appName}}</div>
+                <div class="tableCell">{{item.title}}</div>
+                <div class="tableCell">{{item.category}}</div>
+                <div class="tableCell">{{item.readingNumber}}</div>
+                <div class="tableCell">{{item.approveNumber}}</div>
+                <div class="tableCell">{{item.createTime}}</div>
+                <div class="tableCell">
+                  <el-button type="primary" class="major" v-if="wx_news_edit"
+                             @click.prevent.stop="setTopState(item.newsId, !item.isSticky)">{{item.isSticky ? '取消置顶' :
+                    '置顶'}}
+                  </el-button>
+                  <el-button type="primary" class="major" v-if="wx_news_edit"
+                             @click.prevent.stop="openDiggInfo(item.newsId)">编辑
+                  </el-button>
+                  <el-button type="danger" class="major" v-if="wx_news_delete"
+                             @click.prevent.stop="deleteDiggInfo(item.newsId)">删除
+                  </el-button>
+                  <span v-if="!wx_news_edit && !wx_news_delete">暂无编辑权限</span>
+                </div>
+              </div>
+            </div>
+            <div class="noneData" v-if="dataList.length === 0">
+              暂无数据
             </div>
           </div>
         </div>
-        <div class="noneData" v-if="dataList.length === 0">
-          暂无数据
-        </div>
-        <div class="pagination">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="pageNo"
-            :page-sizes="[10, 20, 50, 100]"
-            :page-size="pageSize"
-            layout=" prev, pager, next,total, sizes, jumper"
-            background
-            :total="totalCount">
-          </el-pagination>
-        </div>
+      </div>
+      <div class="pagination">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="pageNo"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pageSize"
+          layout=" prev, pager, next,total, sizes, jumper"
+          background
+          :total="totalCount">
+        </el-pagination>
       </div>
     </div>
     <!-- 是否删除文章开始 -->
@@ -303,6 +306,6 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '../style/weixinDiggInfo.scss';
 </style>

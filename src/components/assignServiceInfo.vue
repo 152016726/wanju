@@ -7,167 +7,38 @@
     </div>
     <!-- 签约弹窗公共横栏结束 -->
     <div class="assignServiceContent">
-      <p class="contentTitle">签约人：张三</p>
+      <p class="contentTitle">签约人：{{signer}}</p>
       <div class="servicePackages">
-      <p class="assignSignerTitle">
-        <span class="title">一般人群收费服务包</span>
-      </p>
-      <div class="serviceTable">
-        <div class="serviceThead">
-          <div class="serviceTableCell index">序号</div>
-          <div class="serviceTableCell categories">项目分类</div>
-          <div class="serviceTableCell serviceInfo">服务内容</div>
-          <div class="serviceTableCell serviceTimes">服务次数</div>
-          <div class="serviceTableCell serviceExplain">服务内容解释</div>
-          <div class="serviceTableCell serviceRemark">备注</div>
-        </div>
-        <div class="serviceColumn">
-          <div class="serviceTableCell">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-          </div>
-          <div class="serviceTableCell borderBottom">
-            健康管理
-          </div>
-          <div class="serviceTableCell">
-            <div class="col2">健康档案</div>
-            <div>健康教育</div>
-            <div>健康评估</div>
-          </div>
-          <div class="serviceTableCell">
-            <div class="col2">终生</div>
-            <div>2次</div>
-            <div>1次/年</div>
-          </div>
-          <div class="serviceTableCell">
-            <div>二三级医院专家预约挂号</div>
-            <div>二三级医院专家预约挂号</div>
-            <div>健康教育</div>
-            <div>健康评估</div>
-          </div>
-          <div class="serviceTableCell"></div>
-        </div>
-        <div class="serviceColumn">
-          <div class="serviceTableCell">
-            <div>5</div>
-            <div>6</div>
-            <div>7</div>
-            <div>8</div>
-            <div>9</div>
-            <div>10</div>
-          </div>
-          <div class="serviceTableCell borderBottom">
-            协助就医
-          </div>
-          <div class="serviceTableCell">
-            <div>转诊服务</div>
-            <div>本机构预约就诊</div>
-            <div>二三级医院专家预约挂号</div>
-            <div>大型检查预约</div>
-            <div>住院预约</div>
-            <div>手术预约</div>
-          </div>
-          <div class="serviceTableCell">
-            <div>不限</div>
-            <div>不限</div>
-            <div>7次/年</div>
-            <div>10次/年</div>
-            <div>不限</div>
-            <div>不限</div>
-          </div>
-          <div class="serviceTableCell">
-            <div>转诊服务</div>
-            <div>本机构预约就诊</div>
-            <div>二三级医院专家预约挂号</div>
-            <div>大型检查预约</div>
-            <div>住院预约</div>
-            <div>手术预约</div>
-          </div>
-          <div class="serviceTableCell"></div>
-        </div>
+        <p class="assignSignerTitle">
+          <span class="title">{{serviceInfo.FWBMC}}</span>
+        </p>
+        <table class="serviceTable">
+          <tbody>
+          <tr class="serviceThead">
+            <th class="serviceTableCell index">序号</th>
+            <th class="serviceTableCell categories">项目分类</th>
+            <th class="serviceTableCell serviceTimes">服务次数</th>
+            <th class="serviceTableCell serviceExplain">服务内容解释</th>
+            <th class="serviceTableCell serviceRemark">备注</th>
+          </tr>
+          <tr class="serviceColumn" v-for="(item,index) in serviceInfo.FWXMLBList" :key="index">
+            <td class="serviceTableCell">
+              <div>{{index+1}}</div>
+            </td>
+            <td class="serviceTableCell">
+              {{item.FWXMMC}}
+            </td>
+            <td class="serviceTableCell">
+              <div>{{item.FWCS}}</div>
+            </td>
+            <td class="serviceTableCell">
+              <div>{{item.FWXMMS}}</div>
+            </td>
+            <td class="serviceTableCell"></td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <p class="assignSignerTitle">
-        <span class="title">高血压患者收费服务包</span>
-      </p>
-      <div class="serviceTable">
-        <div class="serviceThead">
-          <div class="serviceTableCell index">序号</div>
-          <div class="serviceTableCell categories">项目分类</div>
-          <div class="serviceTableCell serviceInfo">服务内容</div>
-          <div class="serviceTableCell serviceTimes">服务次数</div>
-          <div class="serviceTableCell serviceExplain">服务内容解释</div>
-          <div class="serviceTableCell serviceRemark">备注</div>
-        </div>
-        <div class="serviceColumn">
-          <div class="serviceTableCell">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-          </div>
-          <div class="serviceTableCell">
-            健康管理
-          </div>
-          <div class="serviceTableCell">
-            <div class="col2">健康档案</div>
-            <div>健康教育</div>
-            <div>健康评估</div>
-          </div>
-          <div class="serviceTableCell">
-            <div class="col2">终生</div>
-            <div>2次</div>
-            <div>1次/年</div>
-          </div>
-          <div class="serviceTableCell">
-            <div>二三级医院专家预约挂号</div>
-            <div>二三级医院专家预约挂号</div>
-            <div>健康教育</div>
-            <div>健康评估</div>
-          </div>
-          <div class="serviceTableCell"></div>
-        </div>
-        <div class="serviceColumn">
-          <div class="serviceTableCell">
-            <div>5</div>
-            <div>6</div>
-            <div>7</div>
-            <div>8</div>
-            <div>9</div>
-            <div>10</div>
-          </div>
-          <div class="serviceTableCell">
-            协助就医
-          </div>
-          <div class="serviceTableCell">
-            <div>转诊服务</div>
-            <div>本机构预约就诊</div>
-            <div>二三级医院专家预约挂号</div>
-            <div>大型检查预约</div>
-            <div>住院预约</div>
-            <div>手术预约</div>
-          </div>
-          <div class="serviceTableCell">
-            <div>不限</div>
-            <div>不限</div>
-            <div>7次/年</div>
-            <div>10次/年</div>
-            <div>不限</div>
-            <div>不限</div>
-          </div>
-          <div class="serviceTableCell">
-            <div>转诊服务</div>
-            <div>本机构预约就诊</div>
-            <div>二三级医院专家预约挂号</div>
-            <div>大型检查预约</div>
-            <div>住院预约</div>
-            <div>手术预约</div>
-          </div>
-          <div class="serviceTableCell"></div>
-        </div>
-      </div>
-    </div>
     </div>
   </div>
 </template>
@@ -179,14 +50,19 @@
       return {}
     },
     props: {
-      toggleMainContent: {},        // 内容的显示隐藏切换函数
+      serviceInfo: {
+        default: () => {
+        }
+      },          // 服务详情
+      signer: '',                              // 签约人
+      toggleMainContent: {},                   // 内容的显示隐藏切换函数
     },
     methods: {
       /**
        * 关闭弹窗
        */
       closeContent() {
-        this.toggleMainContent(1)
+        this.toggleMainContent(-1)
       }
     }
   }
@@ -196,6 +72,7 @@
   .assignServiceInfo {
     width: 1354px;
     border-radius: 4px;
+
     .assignDialogTitle {
       width: 100%;
       font-size: 18px;
@@ -215,83 +92,77 @@
         transform: translateY(-50%);
       }
     }
-    .assignServiceContent{
+
+    .assignServiceContent {
       background-color: #ffffff;
-      padding: 15px 60px;
+      padding: 30px 60px;
 
       .contentTitle {
-        line-height: 44px;
+        /*line-height: 44px;*/
         font-size: 16px;
-        border-bottom: 1Px solid #DDDDDD;
+        border-bottom: 1px solid #DDDDDD;
         text-align: left;
       }
-      .servicePackages{
-        .assignSignerTitle{
+
+      .servicePackages {
+        .assignSignerTitle {
           text-align: left;
           font-weight: bold;
           font-size: 18px;
           padding-top: 28px;
           padding-bottom: 20px;
+          border:none;
+          text-indent: 0;
         }
-        .serviceTable{
-          display: table;
-          border-top: 1Px solid #DDDDDD;
-          border-left: 1Px solid #DDDDDD;
+
+        .serviceTable {
+          border: 1px solid #DDDDDD;
           background-color: #ffffff;
           box-sizing: border-box;
           border-collapse: collapse;
-          .serviceTableCell{
+
+          .serviceTableCell {
             font-size: 16px;
             text-align: center;
             vertical-align: middle;
-            display: table-cell;
-            border-right: 1Px solid #DDDDDD;
+            border: 1px solid #DDDDDD;
+            padding: 4px 4px;
             box-sizing: border-box;
             border-collapse: collapse;
-            &.borderBottom{
-              border-bottom: 1Px solid #DDDDDD;
-            }
-            >div{
-              height: 50px;
-              line-height: 50px;
-              border-bottom: 1Px solid #DDDDDD;
-              box-sizing: border-box;
+            line-height: 30px;
+          }
+
+          .serviceThead {
+            background-color: #F3F3F3;
+
+            .serviceTableCell {
+              line-height: 38px;
+              border-bottom: 1px solid #DDDDDD;
             }
 
-          }
-          .serviceThead{
-            display: table-header-group;
-            background-color: #F3F3F3;
-            .serviceTableCell{
-              height: 38px;
-              line-height: 38px;
-              border-bottom: 1Px solid #DDDDDD;
-            }
-            .index{
+            .index {
               width: 60px;
             }
-            .categories{
+
+            .categories {
+              width: 297px;
+            }
+
+            .serviceTimes {
               width: 90px;
             }
-            .serviceInfo{
-              width: 207px;
-            }
-            .serviceTimes{
-              width: 90px;
-            }
-            .serviceExplain{
+
+            .serviceExplain {
               width: 690px;
             }
-            .serviceRemark{
+
+            .serviceRemark {
               width: 90px;
             }
           }
-          .serviceColumn{
-            display: table-row;
-            .col2{
-              height: 100px;
-              line-height: 100px;
-            }
+
+          .serviceColumn {
+            border-collapse: collapse;
           }
         }
       }

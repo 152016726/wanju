@@ -1,8 +1,58 @@
+// 兼容1024屏幕
+@media screen and (max-width: 1300px){
+  .accountManage .accountSearch{
+    .commonTextInput{
+      &:nth-child(1), &:nth-child(2){
+        .iconText{
+          width: 105px;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
 .accountManage {
   padding: 30px 20px 10px 20px;
+  height: 100%;
+  box-sizing: border-box;
+
+  .flexBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    height: 100%;
+    box-sizing: border-box;
+  }
 
   .paddingBox {
     padding: 30px 0;
+  }
+
+  .pagination{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .accountSearch{
+    display: flex;
+    background-color: #F0F2F5;
+    .commonTextInput, .commonSelector{
+      margin-right: 20px;
+    }
+    .iconText{
+      width: 65px;
+      text-align: right;
+    }
+    .major{
+      height: 30px;
+      padding: 0 10px;
+      margin-right: 0px;
+      span{
+        line-height: 30px;
+      }
+    }
   }
 
   .accountManageContent {
@@ -15,9 +65,8 @@
     position: relative;
 
     .major {
-      width: 80px;
+      padding: 0 20px;
       height: 30px;
-      padding: 0 0;
       margin: 0 0;
 
       span {
@@ -58,12 +107,6 @@
         color: #ADB0B5;
         line-height: 50px;
         font-size: 16px;
-      }
-
-      .pagination{
-        display: flex;
-        justify-content: center;
-        padding: 10px 0;
       }
 
       .personTable {

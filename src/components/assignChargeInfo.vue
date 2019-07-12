@@ -78,7 +78,7 @@
       commonDialog
     },
     props:{
-      serviceInfo: {default: ()=>{}}, // 服务包内容
+      chargeInfo: {default: ()=>{}}, // 付费信息
       isShow: {default: false},
       toggleMainContent: {},        // 内容的显示隐藏切换函数
     },
@@ -132,8 +132,8 @@
       .chargeInfo {
         .chargeTable {
           display: table;
-          border-top: 1Px solid #DDDDDD;
-          border-left: 1Px solid #DDDDDD;
+          border-top: 1px solid #DDDDDD;
+          border-left: 1px solid #DDDDDD;
           background-color: #ffffff;
           box-sizing: border-box;
           border-collapse: collapse;
@@ -149,8 +149,8 @@
               text-align: center;
               vertical-align: middle;
               display: table-cell;
-              border-right: 1Px solid #DDDDDD;
-              border-bottom: 1Px solid #DDDDDD;
+              border-right: 1px solid #DDDDDD;
+              border-bottom: 1px solid #DDDDDD;
               box-sizing: border-box;
             }
           }

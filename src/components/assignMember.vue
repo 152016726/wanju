@@ -1,7 +1,7 @@
 <template>
   <div class="assignMember">
     <div class="assignMemberInfo clearfix">
-      <img class="memberAvatar fl" :src="memberInfo.GRTXWJID ? downloadUrl+memberInfo.GRTXWJID : memberInfo.XB === '男' ? man : woman"/>
+      <img class="memberAvatar fl" :src="memberInfo.GRTXWJID ? downloadUrl+memberInfo.GRTXWJID : memberInfo.XB === '男性' ? man : woman"/>
       <div class="memberInfo fl">
         <p class="info"><span class="name">{{memberInfo.XM}}</span> <i class="gender">{{memberInfo.XB}}</i></p>
         <div class="idCardNum">{{memberInfo.SFZJH}}</div>

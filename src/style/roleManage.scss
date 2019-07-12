@@ -1,5 +1,7 @@
 .roleManage{
   padding: 30px 20px 10px 20px;
+  height: 100%;
+  box-sizing: border-box;
   .paddingBox {
     padding: 30px 0;
   }
@@ -8,14 +10,23 @@
     //min-height: 820px;
     //max-height: 972px;
     padding: 0 18px;;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
     background-color: #ffffff;
     box-sizing: border-box;
     position: relative;
 
+    .pagination{
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
     .major{
-      width: 80px;
+      padding: 0 10px;
       height: 30px;
-      padding: 0 0;
       margin: 0 0;
       span{
         line-height: 30px;
@@ -54,11 +65,7 @@
         line-height: 50px;
         font-size: 16px;
       }
-      .pagination{
-        display: flex;
-        justify-content: center;
-        padding: 10px 0;
-      }
+
       .personTable {
         display: table;
         width: 100%;
@@ -92,7 +99,9 @@
         .tableRow{
           display: table-row;
           border-bottom: 1px solid #DDDDDD;
-
+          .handle{
+            text-align: left;
+          }
         }
       }
     }

@@ -9,28 +9,32 @@
     <div class="addNewTeamMemberContent">
       <div class="teamIntro clearfix">
         <div class="intro fl center">团队队长</div>
-        <div class="teamMember fl">
-          <div class="member" v-if="!!leader">
-            <img :src="leader.headImgFileId ? downloadUrl + leader.headImgFileId : leader.XB === '男' ? man : women" :alt="leader.YSXM" class="avatar">
-            <span class="doctorName">{{leader.YSXM}}</span>
-            <span class="gender">{{leader.XB}}</span>
-            <span class="doctorType">{{leader.posTitleName}}</span>
-            <i class="icon" @click.prevent.stop="deleteClick(leader.YSTDCYID)"></i>
+        <div class="newMember fl">
+          <div class="teamMember">
+            <div class="member" v-if="!!leader">
+              <img :src="leader.headImgFileId ? downloadUrl + leader.headImgFileId : (leader.XB === '男性' ? man : women)" :alt="leader.YSXM" class="avatar">
+              <span class="doctorName">{{leader.YSXM}}</span>
+              <span class="gender">{{leader.XB}}</span>
+              <span class="doctorType">{{leader.posTitleName}}</span>
+              <i class="icon" @click.prevent.stop="deleteClick(leader.YSTDCYID)"></i>
+            </div>
+            <div class="addTeamMember" v-if="!leader" @click.stop.prevent="addTeamLeader"></div>
           </div>
-          <div class="addTeamMember" v-if="!leader" @click.stop.prevent="addTeamLeader"></div>
         </div>
       </div>
       <div class="teamIntro clearfix">
         <div class="intro fl center">团队成员</div>
-        <div class="teamMember fl">
-          <div class="member" v-for="(item, index) in memberList" :key="index">
-            <img :src="item.headImgFileId ? downloadUrl + item.headImgFileId : item.XB === '男' ? man : women" :alt="item.YSXM" class="avatar">
-            <span class="doctorName">{{item.YSXM}}</span>
-            <span class="gender">{{item.XB}}</span>
-            <span class="doctorType">{{item.posTitleName}}</span>
-            <i class="icon" @click.prevent.stop="deleteClick(item.YSTDCYID)"></i>
+        <div class="newMember fl">
+          <div class="teamMember">
+            <div class="member" v-for="(item, index) in memberList" :key="index">
+              <img :src="item.headImgFileId ? downloadUrl + item.headImgFileId : (item.XB === '男性' ? man : women)" :alt="item.YSXM" class="avatar">
+              <span class="doctorName">{{item.YSXM}}</span>
+              <span class="gender">{{item.XB}}</span>
+              <span class="doctorType">{{item.posTitleName}}</span>
+              <i class="icon" @click.prevent.stop="deleteClick(item.YSTDCYID)"></i>
+            </div>
+            <div class="addTeamMember" @click.stop.prevent="addTeamMember"></div>
           </div>
-          <div class="addTeamMember" @click.stop.prevent="addTeamMember"></div>
         </div>
       </div>
     </div>
@@ -94,8 +98,8 @@
         ZXYY: '',                           // 删除原因
         YSTDCYID: '',                       // 删除的Id
         isShowDelete: false,
-        women: this.$defaultManImg,
-        man: this.defaultWomanImg,
+        women: this.defaultWomanImg,
+        man: this.$defaultManImg,
         downloadUrl: this.$downloadUrl,                // 下载路径
       }
     },
@@ -319,6 +323,11 @@
 </script>
 
 <style lang="scss">
+  @media screen and (max-width: 1300px){
+    .addNewTeamMember .addNewTeamMemberContent .teamIntro .intro{
+        width: 90px;
+    }
+  }
   .addNewTeamMember {
     .addNewTeamMemberContent {
       padding: 40px 60px;
@@ -335,7 +344,7 @@
     .teamIntro {
       margin-bottom: 30px;
       width: 840px;
-      display: flex;
+      /*display: flex;*/
       .intro {
         width: 75px;
         margin-right: 10px;
@@ -354,6 +363,10 @@
         .el-input__count {
           color: #F65860;
         }
+      }
+
+      .newMember{
+        width: 740px;
       }
 
       .teamMember {
@@ -459,6 +472,10 @@
         line-height: 80px;
         text-align: center;
       }
+    }
+
+    .assignDialogFooter{
+      text-indent: 0px;
     }
 
   }

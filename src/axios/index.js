@@ -11,40 +11,20 @@ axios.defaults.timeout = 20000;
 //http request 拦截器
 axios.interceptors.request.use(
   config => {
-    // config.loadingInstance = Loading.service({
-    //   fullscreen: false,
-    //   lock: false,
-    //   text: '正在拼命加载中',
-    //   spinner: 'el-icon-loading'
-    // });
+    config.loadingInstance = Loading.service({
+      fullscreen: false,
+      lock: false,
+      text: '正在拼命加载中',
+      spinner: 'el-icon-loading'
+    });
     let token = sessionStorage.getItem('auth-token');
     let headerObj = {};
-    // if (config.method === "post") {
-    //   headerObj = {
-    //     'X-Requested-With': 'XMLHttpRequest',
-    //     'Content-Type': 'application/json;charset=UTF-8'
-    //   };
-    // } else if (config.method === "get") {
-    //   headerObj = {
-    //     'X-Requested-With': 'XMLHttpRequest',
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json;charset=UTF-8'
-    //   }
-    // }
     if (token) {
       Object.assign(headerObj, {
         'Jwt-Authorization': token
       })
     }
-
     config.headers = headerObj;
-    // config.headers.common = {
-    //   'Access-Control-Allow-Origin':'*',
-    //   'Access-Control-Allow-Headers':'X-Requested-With,Content-Type',
-    //   'Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS',
-    //   'Access-Control-Allow-Credentials':true,
-    //   'Access-Control-Max-Age':'86400'
-    // };
 
     return config;
   },
@@ -56,7 +36,7 @@ axios.interceptors.request.use(
 // 添加一个响应拦截器
 axios.interceptors.response.use(function (response) {
   // Do something with response data
-  // response.config.loadingInstance.close();
+  response.config.loadingInstance.close();
   if (response.data.errcode !== 0) {
     // 401:未登录用户; 402:登陆信息已过期;
     if (response.data.errcode === 401 || response.data.errcode === 402) {
@@ -75,7 +55,7 @@ axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   // Do something with response error
-  // error.config.loadingInstance.close();
+  error.config.loadingInstance.close();
   if (error.message === 'Network Error' && error.config.url.endsWith('/license')) {
     Message({
       message: '无法连接到本地代理程序，请确认代理程序是否运行正常！',

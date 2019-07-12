@@ -12,7 +12,7 @@
              v-on:focus="textOnFocus"
       />
     </div>
-    <div class="errorTips" v-if="errorFlag">{{errorTips}}</div>
+    <div class="errorTips" v-if="errorFlag && !isDisabled">{{errorTips}}</div>
   </div>
 </template>
 
@@ -87,12 +87,14 @@
         height: 30px;
         line-height: 30px;
         border: 1px solid #DDDDDD;
+        font-size: 16px;
         text-indent: 8px;
         box-sizing: border-box;
+        border-radius: 4px;
         -webkit-box-shadow: 0 0 0px 1000px white inset;
 
         &.active {
-          border: 1Px solid #4486FF;
+          border-color: #4486FF;
         }
 
         &:disabled {

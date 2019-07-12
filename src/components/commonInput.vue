@@ -7,6 +7,7 @@
            class="inputType fl"
            v-model="val"
            v-if="!isPwd"
+           autocomplete="off"
            :placeholder="placeholderText"
            v-on:blur="textOnblur"
            v-on:focus="textOnFocus"
@@ -15,6 +16,7 @@
     <input
       type="password"
       class="inputType fl"
+      autocomplete="off"
       v-model="val"
       :placeholder="placeholderText"
       v-if="isPwd"
@@ -40,12 +42,11 @@
       inputing: {default: ''},            // type:string   描叙:左边激活状态的小图标
       isPwd: {default: false},            // type:boolean  描叙: 是否为密码组件
       placeholderText: {default: ''},     // type:string   描述:placeholder
-      maxLength: {default: 20},           // type:number   描述:最大长度
-      rexpRule: {default: ''}             // type:RegExp   描述:正则表达式
+      // maxLength: {default: 20},           // type:number   描述:最大长度
     },
     watch: {
-      val() {
-        this.identifyValue()
+      val(str) {
+        this.$emit('input', str)
       },
       value(item){
         this.val = item;
@@ -67,17 +68,6 @@
         this.active = true;
       },
       /**
-       * 验证value
-       */
-      identifyValue(){
-        let obj = {
-          text: this.val
-        };
-        if(this.rexpRule) obj.flag = this.rexpRule.test(this.val) && !(this.val.length > this.maxLength);
-        this.active = true;
-        this.$emit('onChangeText', obj)
-      },
-      /**
        * 回车触发事件
        */
       submitData(){
@@ -92,11 +82,12 @@
     width: 100%;
     height: 40px;
     padding: 10px 0;
+    font-size: 16px;
     box-sizing: border-box;
-    border: 1Px solid #DDDDDD;
+    border: 1px solid #DDDDDD;
     border-radius: 4px;
     &.active{
-      border: 1Px solid #4486FF;
+      border: 1px solid #4486FF;
     }
     .icon {
       width: 11.67%;
@@ -119,6 +110,7 @@
       font-size: 16px;
       color: #3F4457;
       -webkit-box-shadow: 0 0 0px 1000px white inset;
+      background-color: #ffffff!important;
       input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
         /* WebKit browsers */
         color: #BABABA;

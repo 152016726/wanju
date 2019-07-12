@@ -2,54 +2,50 @@
   <div class="login">
     <div class="loginDialog">
       <h1>家庭医生签约管理系统</h1>
-      <div class="loginBox">
-        <div class="input">
-          <commonInput
-            v-model="account"
-            :inputImg="accountOff"
-            :inputing="accountOn"
-            :maxLength="11"
-            :placeholderText="'请输入账号'"
-            @onChangeText="changeAcount"
-          >
-          </commonInput>
+      <form action="">
+        <input type="password" v-if="false">
+        <div class="loginBox">
+          <div class="input">
+            <commonInput
+              v-model="account"
+              :inputImg="accountOff"
+              :inputing="accountOn"
+              :placeholderText="'请输入账号'"
+            >
+            </commonInput>
+          </div>
+          <div class="input">
+            <commonInput
+              v-model="password"
+              :inputImg="lock"
+              :inputing="unlock"
+              :isPwd="true"
+              :placeholderText="'请输入密码'"
+            >
+            </commonInput>
+          </div>
+          <div class="input verifyCode">
+            <commonInput
+              v-model="imgCode"
+              :inputImg="codeOff"
+              :inputing="codeOn"
+              :isPwd="false"
+              :placeholderText="'请输入验证码'"
+              @submitData="submitData"
+            >
+            </commonInput>
+            <img :src="imgCodeSrc" alt="验证码" class="imgCode" @click.prevent.stop="reGetCodeImg">
+            <a href="#" class="exchangeImg" @click.prevent.stop="reGetCodeImg">换一张</a>
+          </div>
+          <div class="errorTips" v-if="errorState">{{errorTips}}</div>
+          <div class="choosed">
+            <el-checkbox v-model="checked">记住密码</el-checkbox>
+          </div>
+          <a href="#" class="loginBtn" :class="{active: account && password && imgCode}" @click.prevent.stop="submitData">
+            登陆系统
+          </a>
         </div>
-        <div class="input">
-          <commonInput
-            v-model="password"
-            :inputImg="lock"
-            :inputing="unlock"
-            :isPwd="true"
-            :maxLength="20"
-            :placeholderText="'请输入密码'"
-            :rexpRule="/^[\w_-]{6,20}$/"
-            @onChangeText="changePassword"
-          >
-          </commonInput>
-        </div>
-        <div class="input verifyCode">
-          <commonInput
-            :inputImg="codeOff"
-            :inputing="codeOn"
-            :isPwd="false"
-            :maxLength="6"
-            :placeholderText="'请输入验证码'"
-            :rexpRule="/^[0-9A-Za-z]{1,6}$/"
-            @onChangeText="changeImgCode"
-            @submitData="submitData"
-          >
-          </commonInput>
-          <img :src="imgCodeSrc" alt="验证码" class="imgCode" @click.prevent.stop="reGetCodeImg">
-          <a href="#" class="exchangeImg" @click.prevent.stop="reGetCodeImg">换一张</a>
-        </div>
-        <div class="errorTips" v-if="errorState">{{errorTips}}</div>
-        <div class="choosed">
-          <el-checkbox v-model="checked">记住密码</el-checkbox>
-        </div>
-        <a href="#" class="loginBtn" :class="{active: account && password && imgCode}" @click.prevent.stop="submitData">
-          登陆系统
-        </a>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -72,11 +68,9 @@
         account: '',            // 账号
         // accountState: false,    // 账号状态
         password: '',           // 密码
-        passwordState: false,   // 密码状态
         imgCode: '',            // 验证码
         imgCodeSrc: '',         // 验证码图片
         imgVerifyToken: '',     // 验证码token
-        imgCodeState: false,    // 验证码状态
         accountOff,             // 账号未输入时图标
         accountOn,              // 账号输入时图标
         lock,                   // 密码未输入时图标
@@ -91,7 +85,7 @@
       commonInput
     },
     created() {
-      let info = this.$localStore.getItem('accountInfo');
+      let info = JSON.parse(this.$localStore.getItem('accountInfo'));
       let token = this.$localStore.getItem('auth-token');
       // 有token强制跳转至登陆页则强制跳转回首页
       if(token) this.$router.push({path: './'});
@@ -106,7 +100,7 @@
        * 提交数据
        **/
       submitData() {
-        if (this.passwordState && this.imgCodeState) {
+        if (this.account && this.password && this.imgCode) {
           this.errorState = false;
           const {account, password, imgCode, imgVerifyToken} = this;
           // 请求登陆接口
@@ -154,8 +148,7 @@
         } else {
           this.errorState = true;
           // if (!this.accountState) this.errorTips = '账号各位需为手机号码格式';
-          if (!this.passwordState) this.errorTips = '密码需为6-20位';
-          else if (!this.imgCodeState) this.errorTips = '图形验证码为1-6位的数字和字母';
+         this.errorTips = '输入值不能为空';
         }
       },
       /**
@@ -165,22 +158,6 @@
       changeAcount(obj) {
         this.account = obj.text;
         // this.accountState = obj.flag;
-      },
-      /**
-       * 获取输入的密码和是否输入正确的状态
-       * @param obj
-       */
-      changePassword(obj) {
-        this.password = obj.text;
-        this.passwordState = obj.flag;
-      },
-      /**
-       * 获取输入的图形验证码和是否输入正确的状态
-       * @param obj
-       */
-      changeImgCode(obj) {
-        this.imgCode = obj.text;
-        this.imgCodeState = obj.flag;
       },
       /**
        * 重新获取验证码

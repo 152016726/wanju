@@ -14,8 +14,10 @@
       </div>
       <div class="serviceTableRow">
         <div class="serviceTableCell name">个人合付</div>
-        <div class="serviceTableCell detail">0元 <a href="#" class="lookDetail"
-                                                          @click.stop.prevent="toggleMainContent">查看明细</a></div>
+        <div class="serviceTableCell detail">
+          0元
+          <!--<a href="#" class="lookDetail" @click.stop.prevent="toggleMainContent">查看明细</a>-->
+        </div>
       </div>
       <div class="serviceTableRow">
         <div class="serviceTableCell name">申请时间</div>
@@ -35,7 +37,7 @@
       </div>
       <div class="serviceTableRow">
         <div class="serviceTableCell name">签约状态</div>
-        <div class="serviceTableCell detail"><span>{{signerInfo.QYZTMC}}</span></div>
+        <div class="serviceTableCell detail"><span>{{signerInfo.ORDERSTATUSNAME}}</span></div>
       </div>
       <div class="serviceTableRow">
         <div class="serviceTableCell name">解约原因</div>
@@ -45,37 +47,35 @@
         <div class="serviceTableCell name">签约协议</div>
         <div class="serviceTableCell detail">
           <a href="#"
-             class="print"
-             :class="{highlight: signStatus=== 1}"
-             @click.prevent.stop=""
+             class="print highlight"
+             v-if="signStatus=== 1"
+             @click.prevent.stop="printPdf"
           >
             打印
+            <i class="printing"></i>
           </a>
+          <span class="print" v-if="signStatus !== 1">打印 <i class="printed"></i></span>
         </div>
       </div>
     </div>
     <div class="btns" v-if="isShowSign">
       <el-button type="primary" class="major" v-if="signStatus === 0" @click.prevent.stop="toggleSignDialog">通过
       </el-button>
-      <el-button type="danger" v-if="signStatus === 0" @click.prevent.stop="toggleRejctDialog">拒绝</el-button>
+      <el-button type="danger" v-if="signStatus === 0" @click.prevent.stop="toggleRejctDialog" class="reject">拒绝</el-button>
       <el-button type="info" v-if="signStatus === 2" plain disabled class="refused">已拒绝</el-button>
       <el-button type="info" v-if="signStatus === 3" plain disabled class="canceled">已取消</el-button>
       <el-button type="info" v-if="signStatus === 4" plain disabled class="retracted">已解约</el-button>
       <el-button type="info" v-if="signStatus === 5" plain disabled class="overTimed">已过期</el-button>
-      <!--<el-button type="danger" class="cancel" v-if="signStatus === 1" @click.prevent.stop="toggleTerminateDialog">解约-->
-      <!--</el-button>-->
+      <el-button type="danger" class="cancel" v-if="signStatus === 1" @click.prevent.stop="toggleTerminateDialog">解约
+      </el-button>
     </div>
     <!-- 服务包弹窗开始 -->
-    <commonDialog
+
+    <assignChargeInfo
+      :isShow="isShowServicePackage"
       :toggleMainContent='toggleMainContent'
-      :show='isShowServicePackage'
-      :isShowText='false'
     >
-      <assignServiceInfo
-        :toggleMainContent="toggleMainContent"
-      >
-      </assignServiceInfo>
-    </commonDialog>
+    </assignChargeInfo>
     <!-- 服务包弹窗结束 -->
 
     <!-- 通过签约弹窗开始 -->
@@ -110,29 +110,53 @@
       :confirmDialog="retractFile"
     >
       <div class="paddingBox nonePaddingBottom">
-        <commonSelector :options="terminationList" v-model="terminationPerson" :text="'解约人'"></commonSelector>
-        <commonSelector :options="terminationReasonList" v-model="terminationReason" :text="'解约原因'"></commonSelector>
+        <commonTextArea v-model="JYYY" :text="'解约原因'"></commonTextArea>
       </div>
     </assignAlertDialog>
     <!-- 解约弹窗结束 -->
+
+    <!-- 打印的内容开始 -->
+    <iframe class="myIframe" frameborder=0 name="showHere" scrolling=auto src="">
+      <pdfPrint
+        ref="print"
+        :PARTYA="pdfInfo.PARTYA"
+        :PARTYB="pdfInfo.PARTYB"
+        :SFZJH="pdfInfo.SFZJH"
+        :LXDH="pdfInfo.LXDH"
+        :JTZZ="pdfInfo.JTZZ"
+        :TDMC="pdfInfo.TDMC"
+        :TDCYList="pdfInfo.TDCYList"
+        :TDZRYS="pdfInfo.TDZRYS"
+        :TDLXDH="pdfInfo.TDLXDH"
+        :QYFWList="pdfInfo.QYFWList"
+        :JTCYList="pdfInfo.JTCYList"
+      >
+      </pdfPrint>
+    </iframe>
+    <!-- 打印的内容结束 -->
   </div>
 </template>
 
 <script>
   import commonDialog from './commonDialog';                             // 公共弹窗
-  import assignServiceInfo from './assignServiceInfo';                  // 签约详情弹窗
+  import assignChargeInfo from './assignChargeInfo';                     // 费用详情弹窗
   import assignAlertDialog from './assignAlertDialog';                  // 通过/拒绝弹窗组件
   import commonSelector from './commonSelector';                        // 公共选择器
+  import commonTextArea from './commonTextArea';
+  import pdfPrint from '@/components/pdfPrint';                          // pdf打印组件
 
   const APPROVAL_LIST = [0, 1, 2];                                // 可以展示审批的字段
+  let timer = 'pdfTimer';                                       //
 
   export default {
     name: "assignSignerInfo",
     components: {
-      assignServiceInfo,
+      assignChargeInfo,
       commonDialog,
       assignAlertDialog,
-      commonSelector
+      commonSelector,
+      commonTextArea,
+      pdfPrint
     },
     data() {
       return {
@@ -163,17 +187,8 @@
             label: '王五'
           }
         ],
-        terminationReason: '',              // 解约原因
-        terminationReasonList: [            // 解约原因List
-          {
-            value: '1',
-            label: '信息填写错误'
-          },
-          {
-            value: '2',
-            label: '信息不全'
-          }
-        ],
+        JYYY: '',                        // 解约原因
+        pdfInfo: {}
       }
     },
     props: {
@@ -181,6 +196,7 @@
         default: () => {
         }
       },         // 签约信息
+      QYID: '',                             // 签约ID
       signStatus: {default: 0},            // 签约状态 0代表待审核，1代表已签约，2代表已拒绝，3已取消，4已解约，5已过期
       isShowSign: {default: false}           // 是否展示审批签约
     },
@@ -245,7 +261,38 @@
        * 解约触发事件
        */
       retractFile() {
-
+        const {QYID, JYYY} = this;
+        this.$post('family/sign/order/cancelSignFamily',{QYID, JYYY}).then(rsp=>{
+          this.$emit('setSignStatus', 4);
+          this.toggleTerminateDialog();
+          // this.$emit('initData');
+          this.$emit('closeDialog');
+        }, rej=>{
+          if(rej.data.errcode === 460){
+            this.$message.error(rej.data.datas[0].message);
+          }else{
+            this.$message.error(rej.data.errmsg);
+          }
+        })
+      },
+      /**
+       * 打印
+       */
+      printPdf(){
+        const {QYID} = this;
+        this.$post('family/sign/order/buildPdf',{QYID}).then(rsp=>{
+          this.pdfInfo = rsp.data;
+          clearTimeout(timer);
+          timer = setTimeout(()=>{
+            this.$print(this.$refs.print.$el);
+          }, 1000);
+        }, rej=>{
+          if(rej.data.errcode === 460){
+            this.$message.error(rej.data.datas[0].message);
+          }else{
+            this.$message.error(rej.data.errmsg);
+          }
+        });
       }
     }
   }
@@ -255,6 +302,9 @@
   .assignSignerInfo {
     .paddingBox {
       padding: 30px 0;
+    }
+    .myIframe{
+      height: 0;
     }
 
     .nonePaddingBottom {
@@ -281,8 +331,8 @@
 
     .signServiceInfo {
       display: table;
-      border-top: 1Px solid #DDDDDD;
-      border-left: 1Px solid #DDDDDD;
+      border-top: 1px solid #DDDDDD;
+      border-left: 1px solid #DDDDDD;
       box-sizing: border-box;
 
       .serviceTableRow {
@@ -293,8 +343,8 @@
           line-height: 50px;
           text-align: center;
           font-size: 16px;
-          border-right: 1Px solid #DDDDDD;
-          border-bottom: 1Px solid #DDDDDD;
+          border-right: 1px solid #DDDDDD;
+          border-bottom: 1px solid #DDDDDD;
           box-sizing: border-box;
           display: table-cell;
 
@@ -316,6 +366,22 @@
           .print {
             color: #4486FF;
             opacity: 0.3;
+            .printing{
+              height: 16px;
+              width: 16px;
+              display: inline-block;
+              vertical-align: middle;
+              background: url("../assets/ic_printing_on.png") no-repeat;
+              background-size: contain;
+            }
+            .printed{
+              height: 16px;
+              width: 16px;
+              display: inline-block;
+              vertical-align: middle;
+              background: url("../assets/ic_printing_off.png") no-repeat;
+              background-size: contain;
+            }
 
             &.highlight {
               opacity: 1;
@@ -331,6 +397,10 @@
 
       .major {
         margin-right: 20px !important;
+        background-color: #4486ff;
+      }
+      .reject{
+        background-color: #F65860;
       }
 
       .el-button {

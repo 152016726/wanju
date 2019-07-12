@@ -16,7 +16,7 @@
       </div>
 
       <!-- 弹窗底部开始 -->
-      <div class="assignDialogFooter" v-if="isShowFooter">
+      <div class="assignDialogFooter" v-if="isShowFooter" :class="{alignCenter: isCenter, alignLeft: !isCenter,}" :style="{'text-indent':textIndent}">
         <el-button type="primary" class="major" @click.stop.prevent="checkDialog">确定</el-button>
         <el-button type="info" class="info" @click.stop.prevent="cutOffDialog">取消</el-button>
       </div>
@@ -38,6 +38,8 @@
       isShowDialog: {default: false},            // 是否显示弹窗
       toggleContent: {},                         // 开关弹窗
       confirmDialog: {},                        // 确定
+      isCenter: {default: true},                // 是否居中
+      textIndent: {default: 0},
       isShowFooter: {default: true}             // 是否展示底部
     },
     methods: {
@@ -106,13 +108,26 @@
     .assignDialogFooter{
       margin: 0 auto;
       padding-bottom: 24px;
-      text-align: center;
+      &.alignCenter{
+        text-align: center;
+      }
+      &.alignLeft{
+        text-align: left;
+      }
       .el-button{
         margin: 0 10px;
         padding: 0 0;
         width: 86px;
         height: 30px;
         font-size: 16px;
+      }
+      .major{
+        background-color: #4486ff;
+        border:none;
+      }
+      .info{
+        background-color: #bbbbbb;
+        border:none;
       }
     }
   }

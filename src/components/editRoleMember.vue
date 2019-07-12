@@ -33,7 +33,7 @@
       </div>
       <div class="description">
         <div class="teamIntro clearfix">
-          <div class="intro fl">团队简介</div>
+          <div class="intro fl">个人简介</div>
           <el-input
             class="textArea fl"
             type="textarea"
@@ -46,7 +46,7 @@
           </el-input>
         </div>
         <div class="teamIntro clearfix">
-          <div class="intro fl">团队擅长</div>
+          <div class="intro fl">个人擅长</div>
           <el-input
             class="textArea fl"
             type="textarea"
@@ -180,6 +180,18 @@
 </script>
 
 <style lang="scss">
+  @media screen and (max-width: 1300px){
+    .editRoleMember .editRoleLeft{
+      .iconText{
+        width: 90px;
+      }
+    }
+    .editRoleMember .description .teamIntro{
+        .intro{
+          width: 90px!important;
+        }
+    }
+  }
   .editRoleMember {
     padding: 0 60px;
     padding-top: 40px;

@@ -9,7 +9,7 @@
       </el-header>
       <!-- 公用头部结束 -->
 
-      <el-container class="clearfix">
+      <el-main class="clearfix">
 
         <!-- 公共左侧栏开始 -->
         <div class="asside fl" v-show="isLogin">
@@ -23,7 +23,7 @@
         </div>
         <!-- 内容部分结束 -->
 
-      </el-container>
+      </el-main>
 
     </el-container>
     <!-- 整个盒子结束 -->
@@ -56,15 +56,18 @@
   @import "./common/css/media.css";
   #app {
     .homePage{
-      min-height: 100%;
+      min-height: 100vh;
     }
     .el-container {
+      min-height: 100%;
       .el-header{
         padding: 0 0 !important;
       }
       .el-main {
         margin: 0 0;
         padding: 0 0;
+        display: flex;
+        min-height: calc(100vh - 60px);
       }
       .asside{
         width: 10.65%;

@@ -32,5 +32,10 @@ export default {
   "wx_news_list": '',                // 公众号资讯列表
   "wx_news_add": '',                 // 公众号资讯新增
   "wx_news_edit": '',                // 公众号资讯编辑
-  "wx_news_delete": ''               // 公众号资讯删除
+  "wx_news_delete": '',               // 公众号资讯删除
+
+  "version_list": '',                // 版本列表
+  "version_edit": '',                // 版本编辑
+  "version_add": '',                 // 版本添加
+  "version_delete": '',              // 版本删除
 }

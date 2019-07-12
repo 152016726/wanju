@@ -60,7 +60,29 @@
         padding: 0 0;
         margin: 0 0;
         text-indent: 8px;
+        font-size: 16px;
         box-sizing: border-box;
+      }
+      input{
+        &::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+          /* WebKit browsers */
+          color: #BABABA;
+        }
+
+        &:-moz-placeholder, textarea:-moz-placeholder {
+          /* Mozilla Firefox 4 to 18 */
+          color: #BABABA;
+        }
+
+        &::-moz-placeholder, textarea::-moz-placeholder {
+          /* Mozilla Firefox 19+ */
+          color: #BABABA;
+        }
+
+        &:-ms-input-placeholder, textarea:-ms-input-placeholder {
+          /* Internet Explorer 10+ */
+          color: #BABABA;
+        }
       }
       .el-textarea__inner{
         margin: 0 0;

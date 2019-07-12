@@ -2,7 +2,7 @@
   <div class="teamMember">
     <label role="checkbox" class="memberSelect">
       <div class="teamMemberItem" :class="{border: msg}">
-        <img :src="dataObj.headImgFileId ? downloadUrl + dataObj.headImgFileId : dataObj.XB === '男' ? man : women" :alt="dataObj.doctorName" class="avatar">
+        <img :src="dataObj.headImgFileId ? downloadUrl + dataObj.headImgFileId : dataObj.sexName === '男性' ? man : women" :alt="dataObj.doctorName" class="avatar">
         <span class="doctorName">{{dataObj.doctorName}}</span>
         <span class="gender">{{dataObj.sexName}}</span>
         <span class="doctorType">{{dataObj.posTitleName}}</span>
@@ -21,8 +21,8 @@
     data() {
       return {
         msg: '',
-        women: this.$defaultManImg,
-        man: this.defaultWomanImg,
+        women: this.defaultWomanImg,
+        man: this.$defaultManImg,
         downloadUrl: this.$downloadUrl,                // 下载路径
       }
     },

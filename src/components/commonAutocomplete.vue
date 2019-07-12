@@ -95,7 +95,27 @@
     input {
       border: 1px solid #DDDDDD;
       text-indent: 8px;
+      font-size: 16px;
       box-sizing: border-box;
+      &::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: #BABABA;
+      }
+
+      &:-moz-placeholder, textarea:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: #BABABA;
+      }
+
+      &::-moz-placeholder, textarea::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: #BABABA;
+      }
+
+      &:-ms-input-placeholder, textarea:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: #BABABA;
+      }
     }
 
     .el-input__inner {

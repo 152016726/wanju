@@ -1,57 +1,61 @@
 <template>
   <div class="memberManage">
-    <div class="memberSearch">
-      <commonTextInput :text="'全国机构'" v-model="orgName"></commonTextInput>
-      <commonTextInput :text="'医疗姓名'" v-model="doctorName"></commonTextInput>
-      <commonTextInput :text="'医生编码'" v-model="doctorCode"></commonTextInput>
-      <commonSelector :text="'职称'" v-model="posTitleName"></commonSelector>
-      <el-button type="primary" class="major" @click.stop.prevent="searchMember">查询</el-button>
-    </div>
-    <div class="roleManageContent">
-      <div class="personTitle">
-        <p class="title">成员列表</p>
-      </div>
-      <div class="personContent">
-        <div class="personTable">
-          <div class="tableHeader">
-            <div class="tableCell index">序号</div>
-            <div class="tableCell name">姓名</div>
-            <div class="tableCell code">医生编码</div>
-            <div class="tableCell gender">性别</div>
-            <div class="tableCell job">职称</div>
-            <div class="tableCell organization">机构</div>
-            <div class="tableCell handle">操作</div>
+    <div class="flexBox">
+      <div>
+        <div class="memberSearch">
+          <commonTextInput :text="'全国机构'" v-model="orgName"></commonTextInput>
+          <commonTextInput :text="'医生姓名'" v-model="doctorName"></commonTextInput>
+          <commonTextInput :text="'医生编码'" v-model="doctorCode"></commonTextInput>
+          <!--<commonSelector :text="'职称'" v-model="posTitleName"></commonSelector>-->
+          <el-button type="primary" class="major" @click.stop.prevent="searchMember">查询</el-button>
+        </div>
+        <div class="roleManageContent">
+          <div class="personTitle">
+            <p class="title">成员列表</p>
           </div>
-          <div class="tableRow" v-for="(item, index) in dataList" :key="index">
-            <div class="tableCell">{{index+1}}</div>
-            <div class="tableCell">{{item.doctorName}}</div>
-            <div class="tableCell">{{item.doctorCode}}</div>
-            <div class="tableCell">{{item.sexName}}</div>
-            <div class="tableCell">{{item.posTitleName}}</div>
-            <div class="tableCell">{{item.orgName}}</div>
-            <div class="tableCell">
-              <el-button type="primary" v-if="team_member_edit" class="major"
-                         @click.prevent.stop="searchOneMember(item.doctorId)">编辑
-              </el-button>
-              <span v-if="!team_member_edit">暂无权限编辑</span>
+          <div class="personContent">
+            <div class="personTable">
+              <div class="tableHeader">
+                <div class="tableCell index">序号</div>
+                <div class="tableCell name">姓名</div>
+                <div class="tableCell code">医生编码</div>
+                <div class="tableCell gender">性别</div>
+                <!--<div class="tableCell job">职称</div>-->
+                <div class="tableCell organization">机构</div>
+                <div class="tableCell handle">操作</div>
+              </div>
+              <div class="tableRow" v-for="(item, index) in dataList" :key="index">
+                <div class="tableCell">{{index+1}}</div>
+                <div class="tableCell">{{item.doctorName}}</div>
+                <div class="tableCell">{{item.doctorCode}}</div>
+                <div class="tableCell">{{item.sexName}}</div>
+                <!--<div class="tableCell">{{item.posTitleName}}</div>-->
+                <div class="tableCell">{{item.orgName}}</div>
+                <div class="tableCell">
+                  <el-button type="primary" v-if="team_member_edit" class="major"
+                             @click.prevent.stop="searchOneMember(item.doctorId)">编辑
+                  </el-button>
+                  <span v-if="!team_member_edit">暂无权限编辑</span>
+                </div>
+              </div>
+            </div>
+            <div class="noneData" v-if="dataList.length === 0">
+              暂无数据
             </div>
           </div>
         </div>
-        <div class="noneData" v-if="dataList.length === 0">
-          暂无数据
-        </div>
-        <div class="pagination">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="pageNo"
-            :page-sizes="[10, 20, 50, 100]"
-            :page-size="pageSize"
-            layout=" prev, pager, next,total, sizes, jumper"
-            background
-            :total="totalCount">
-          </el-pagination>
-        </div>
+      </div>
+      <div class="pagination">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="pageNo"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pageSize"
+          layout=" prev, pager, next,total, sizes, jumper"
+          background
+          :total="totalCount">
+        </el-pagination>
       </div>
     </div>
     <!-- 是否打开编辑角色窗口开始 -->
@@ -70,6 +74,9 @@
   import commonTextInput from '@/components/commonTextInput';
   import commonSelector from '@/components/commonSelector';
   import editRoleMember from '@/components/editRoleMember';                        // 编辑角色
+
+  let SEARCH_OBJ = {};                                                   // 搜查对象
+
   export default {
     name: "memberManage",
     components: {
@@ -84,7 +91,7 @@
         orgName: '',                      // 机构名称
         doctorName: '',                   // 医生姓名
         doctorCode: '',                   // 医生唯一编码
-        posTitleName: '',                 // 医生职称
+        // posTitleName: '',                 // 医生职称
         pageNo: 1,                        // 当前页码
         pageSize: 10,                     // 当前条数
         totalCount: 0,                    // 页面信息数量（留待后面分页器用）
@@ -116,8 +123,29 @@
        * 查询成员列表（医生）
        */
       searchMember() {
-        const {orgName, doctorName, doctorCode, posTitleName, pageNo, pageSize} = this;
-        this.$post('doctor/getPage', {orgName, doctorName, doctorCode, posTitleName, pageNo, pageSize}).then(rsp => {
+        const {orgName, doctorName, doctorCode, posTitleName, pageSize} = this;
+        // posTitleName,
+        Object.assign(SEARCH_OBJ, this);
+        // 重置为默认的第一页
+        this.pageNo = 1;
+        this.$post('doctor/getPage', {orgName, doctorName, doctorCode,  pageNo: 1, pageSize}).then(rsp => {
+          this.totalCount = rsp.total;
+          this.dataList = rsp.datas;
+        }, rej => {
+          if(rej.data.errcode === 460){
+            this.$message.error(rej.data.datas[0].message);
+          }else{
+            this.$message.error(rej.data.errmsg);
+          }})
+      },
+      /**
+       * 页码变更查询
+       * @param val 页码
+       */
+      pageNoSearch(val){
+        const {orgName, doctorName, doctorCode, posTitleName, pageSize} = SEARCH_OBJ;
+        // posTitleName,
+        this.$post('doctor/getPage', {orgName, doctorName, doctorCode,  pageNo: val, pageSize}).then(rsp => {
           this.totalCount = rsp.total;
           this.dataList = rsp.datas;
         }, rej => {
@@ -140,7 +168,7 @@
        */
       handleCurrentChange(val) {
         this.pageNo = val;
-        this.searchMember();
+        this.pageNoSearch(val);
       }
     },
     created() {

@@ -1,127 +1,130 @@
 <template>
   <div class="signManage">
-    <!-- 头部过滤条件开始 -->
-    <div class="topSpecial">
-      <commonSelector :options="provinceOptions" v-model="provinceId" :text="'全国地域'"></commonSelector>
-      <commonSelector :options="cityOptions" v-model="cityId"></commonSelector>
-      <commonSelector :options="areaOptions" v-model="areaId"></commonSelector>
-      <commonTextInput v-model="medicalInsVal" :text="'医疗机构'"></commonTextInput>
-      <commonTextInput v-model="doctorTeamVal" :text="'医生团队'"></commonTextInput>
-    </div>
-    <div class="filterCondition clearfix">
-      <div class="items col-1 fl">
-        <!--<commonSelector :options="signChannelList" v-model="signChannelVal" :text="'签约渠道'"></commonSelector>-->
-        <commonTextInput v-model="doctorName" :text="'医生姓名'"></commonTextInput>
-        <!--<commonSelector :options="personCategoryList" v-model="personCategoryVal" :text="'人群分类'"></commonSelector>-->
-        <commonDatePicker v-model="applyDateVal" :text="'申请开始日期'" :pickerOptions="applyPickerOptions"></commonDatePicker>
-      </div>
-      <div class="item col-2 fl">
-        <commonTextInput v-model="accountVal" :text="'户主姓名'"></commonTextInput>
-        <commonDatePicker v-model="applyEndDateVal" :text="'申请结束日期'" :pickerOptions="applyEndPickerOptions"></commonDatePicker>
-      </div>
-      <div class="item col-3 fl">
-        <commonTextInput v-model="identityCardVal" :text="'户主身份证'"></commonTextInput>
-        <commonDatePicker v-model="approvalDateVal" :text="'审批开始日期'"
-                          :pickerOptions="approvalPickerOptions"></commonDatePicker>
-
-      </div>
-      <div class="item col-4 fl">
-        <commonTextInput v-model="signNameVal" :text="'签约人姓名'"></commonTextInput>
-        <commonDatePicker v-model="approvalEndDateVal" :text="'审批结束日期'"
-                          :pickerOptions="approvalEndPickerOptions"></commonDatePicker>
-      </div>
-      <div class="item col-5 fl">
-        <commonTextInput v-model="signIdentityCardVal" :text="'签约人身份证'"></commonTextInput>
-        <commonSelector :options="stateList" v-model="signSate" :text="'签约状态'"></commonSelector>
-        <div class="btns">
-          <el-button type="primary" class="major" @click.stop.prevent="searchSignList">查询</el-button>
-          <el-button type="success" @click.prevent.stop="printExcel">导出</el-button>
+    <div class="flexBox">
+      <div>
+        <!-- 头部过滤条件开始 -->
+        <div class="topSpecial">
+          <commonSelector :options="provinceOptions" v-model="provinceId" :text="'全国地域'"></commonSelector>
+          <commonSelector :options="cityOptions" v-model="cityId"></commonSelector>
+          <commonSelector :options="areaOptions" v-model="areaId"></commonSelector>
+          <commonTextInput v-model="medicalInsVal" :text="'医疗机构'"></commonTextInput>
+          <commonTextInput v-model="doctorTeamVal" :text="'医生团队'"></commonTextInput>
         </div>
-      </div>
-    </div>
-    <!-- 头部过滤条件结束 -->
+        <div class="filterCondition clearfix">
+          <div class="item col-1 fl">
+            <!--<commonSelector :options="signChannelList" v-model="signChannelVal" :text="'签约渠道'"></commonSelector>-->
+            <commonTextInput v-model="doctorName" :text="'医生姓名'"></commonTextInput>
+            <!--<commonSelector :options="personCategoryList" v-model="personCategoryVal" :text="'人群分类'"></commonSelector>-->
+            <commonDatePicker v-model="applyDateVal" :text="'申请开始日期'" :pickerOptions="applyPickerOptions"></commonDatePicker>
+          </div>
+          <div class="item col-2 fl">
+            <commonTextInput v-model="accountVal" :text="'户主姓名'"></commonTextInput>
+            <commonDatePicker v-model="applyEndDateVal" :text="'申请结束日期'" :pickerOptions="applyEndPickerOptions"></commonDatePicker>
+          </div>
+          <div class="item col-3 fl">
+            <commonTextInput v-model="identityCardVal" :text="'户主身份证'"></commonTextInput>
+            <commonDatePicker v-model="approvalDateVal" :text="'审批开始日期'"
+                              :pickerOptions="approvalPickerOptions"></commonDatePicker>
 
-    <!-- 签约列表开始 -->
-    <div class="signList">
-      <div class="signTitle">签约人群占比</div>
-      <div class="signTable">
-        <div class="tableHeader">
-          <div class="tableCell index">序号</div>
-          <div class="tableCell homeNum">家庭编号</div>
-          <div class="tableCell account">户主</div>
-          <div class="tableCell signer">签约人</div>
-          <div class="tableCell signMachine">签约机构</div>
-          <div class="tableCell signTeam">签约团队</div>
-          <!--<div class="tableCell signDoctor">签约医生</div>-->
-          <div class="tableCell signDate">申请日期</div>
-          <div class="tableCell approvalDate">审批日期</div>
-          <!--<div class="tableCell signChanel">签约渠道</div>-->
-          <div class="tableCell state">状态</div>
-          <div class="tableCell handle">操作</div>
-        </div>
-        <div class="tableRow" v-for="(item, index) in dataList" :key="index">
-          <div class="tableCell index">
-            <div>{{index+1}}</div>
           </div>
-          <div class="tableCell homeNum">
-            <div>{{item.JTIDSTR}}</div>
+          <div class="item col-4 fl">
+            <commonTextInput v-model="signNameVal" :text="'签约人姓名'"></commonTextInput>
+            <commonDatePicker v-model="approvalEndDateVal" :text="'审批结束日期'"
+                              :pickerOptions="approvalEndPickerOptions"></commonDatePicker>
           </div>
-          <div class="tableCell account">
-            <div>{{item.HZXM}}</div>
-          </div>
-          <div class="tableCell signer">
-            <div><span v-for="(val, key) in item.JTCYLB" :key="key">{{val.CYXM}}</span></div>
-          </div>
-          <div class="tableCell signMachine">
-            <div>{{item.QYJGMC}}</div>
-          </div>
-          <div class="tableCell signTeam">
-            <div>{{item.TDMC}}</div>
-          </div>
-          <!--<div class="tableCell signDoctor">-->
-            <!--<div>{{item.DOCTORNAME}}</div>-->
-          <!--</div>-->
-          <div class="tableCell signDate">
-            <div>{{item.SQRQ}}</div>
-          </div>
-          <div class="tableCell approvalDate">
-            <div>{{item.AUDITTIME}}</div>
-          </div>
-          <!--<div class="tableCell signChanel">-->
-          <!--<div>{{item.QYLY}}</div>-->
-          <!--</div>-->
-          <div class="tableCell state">
-            <div>{{item.ORDERSTATUSNAME}}</div>
-          </div>
-          <div class="tableCell handle">
-            <div class="tag" v-if="sign_check" @click.stop="handleDetailInfo(item.JTID, item.ORDERSTATUS, item.QYID, ISFAMILYRECORDAUDITED, ISMEMBERRECORDAUDITED)">
-              <div class="icon" :style="{backgroundImage: 'url('+iconImg +')'}"></div>
-              <span>操作</span>
-            </div>
-            <div class="tag disabled" v-if="!sign_check">
-              <span>暂无权限查看</span>
+          <div class="item col-5 fl">
+            <commonTextInput v-model="signIdentityCardVal" :text="'签约人身份证'"></commonTextInput>
+            <commonSelector :options="stateList" v-model="signSate" :text="'签约状态'"></commonSelector>
+            <div class="btns">
+              <el-button type="primary" class="major" @click.stop.prevent="searchSignList">查询</el-button>
+              <!--<el-button type="success" @click.prevent.stop="">导出</el-button>-->
             </div>
           </div>
         </div>
+        <!-- 头部过滤条件结束 -->
+
+        <!-- 签约列表开始 -->
+        <div class="signList">
+          <div class="signTitle">签约人群占比</div>
+          <div class="signTable">
+            <div class="tableHeader">
+              <div class="tableCell index">序号</div>
+              <div class="tableCell homeNum">家庭编号</div>
+              <div class="tableCell account">户主</div>
+              <div class="tableCell signer">签约人</div>
+              <div class="tableCell signMachine">签约机构</div>
+              <div class="tableCell signTeam">签约团队</div>
+              <!--<div class="tableCell signDoctor">签约医生</div>-->
+              <div class="tableCell signDate">申请日期</div>
+              <div class="tableCell approvalDate">审批日期</div>
+              <!--<div class="tableCell signChanel">签约渠道</div>-->
+              <div class="tableCell state">状态</div>
+              <div class="tableCell handle">操作</div>
+            </div>
+            <div class="tableRow" v-for="(item, index) in dataList" :key="index">
+              <div class="tableCell index">
+                <div>{{index+1}}</div>
+              </div>
+              <div class="tableCell homeNum">
+                <div>{{item.JTIDSTR}}</div>
+              </div>
+              <div class="tableCell account">
+                <div>{{item.HZXM}}</div>
+              </div>
+              <div class="tableCell signer">
+                <div><span v-for="(val, key) in item.JTCYLB" :key="key">{{val.CYXM}}</span></div>
+              </div>
+              <div class="tableCell signMachine">
+                <div>{{item.QYJGMC}}</div>
+              </div>
+              <div class="tableCell signTeam">
+                <div>{{item.TDMC}}</div>
+              </div>
+              <!--<div class="tableCell signDoctor">-->
+              <!--<div>{{item.DOCTORNAME}}</div>-->
+              <!--</div>-->
+              <div class="tableCell signDate">
+                <div>{{item.SQRQ}}</div>
+              </div>
+              <div class="tableCell approvalDate">
+                <div>{{item.AUDITTIME}}</div>
+              </div>
+              <!--<div class="tableCell signChanel">-->
+              <!--<div>{{item.QYLY}}</div>-->
+              <!--</div>-->
+              <div class="tableCell state">
+                <div>{{item.ORDERSTATUSNAME}}</div>
+              </div>
+              <div class="tableCell handle">
+                <div class="tag" v-if="sign_check" @click.stop="handleDetailInfo(item.JTID, item.ORDERSTATUS, item.QYID)">
+                  <div class="icon" :style="{backgroundImage: 'url('+iconImg +')'}"></div>
+                  <span>操作</span>
+                </div>
+                <div class="tag disabled" v-if="!sign_check">
+                  <span>暂无权限查看</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="noneData" v-if="dataList.length === 0">
+            暂无数据
+          </div>
+          <commonDialog
+            :isShowText="false"
+            :toggleMainContent='toggleMainContent'
+            :show='isShowCommonDialog'
+          >
+            <assignDialog
+              :JTID="JTID"
+              :ORDERSTATUS="ORDERSTATUS"
+              :QYID="QYID"
+              :toggleMainContent="toggleMainContent"
+            >
+            </assignDialog>
+          </commonDialog>
+        </div>
+        <!-- 签约列表结束 -->
       </div>
-      <div class="noneData" v-if="dataList.length === 0">
-        暂无数据
-      </div>
-      <commonDialog
-        :isShowText="false"
-        :toggleMainContent='toggleMainContent'
-        :show='isShowCommonDialog'
-      >
-        <assignDialog
-          :JTID="JTID"
-          :ORDERSTATUS="ORDERSTATUS"
-          :QYID="QYID"
-          :ISFAMILYRECORDAUDITED="ISFAMILYRECORDAUDITED"
-          :ISMEMBERRECORDAUDITED="ISMEMBERRECORDAUDITED"
-          :toggleMainContent="toggleMainContent"
-        >
-        </assignDialog>
-      </commonDialog>
       <div class="pagination">
         <el-pagination
           @size-change="handleSizeChange"
@@ -135,7 +138,6 @@
         </el-pagination>
       </div>
     </div>
-    <!-- 签约列表结束 -->
   </div>
 </template>
 
@@ -152,6 +154,8 @@
   import util from '@/common/js/util';
 
   const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  const ONE_DAY = 24*60*60*1000;                                         // 一天的毫秒数
+  let SEARCH_OBJ = {};                                                   // 搜查对象
 
   export default {
     name: "signManage",
@@ -194,7 +198,7 @@
             if (this.applyDateVal) {
               // 只可以选大于申请日期的数据
               let applyDate = new Date(this.applyDateVal);
-              return time > nowData || time < applyDate
+              return time > nowData || (time < applyDate && !(applyDate.getTime() - time.getTime() > 0 && applyDate.getTime() - time.getTime() < ONE_DAY))
             } else {
               // 不能选大于当天的数据
               return time > nowData
@@ -224,7 +228,7 @@
             if (this.approvalDateVal) {
               // 只可以选大于申请日期的数据
               let applyDate = new Date(this.approvalDateVal);
-              return time > nowData || time < applyDate
+              return time > nowData || (time < applyDate && !(applyDate.getTime() - time.getTime() > 0 && applyDate.getTime() - time.getTime() < ONE_DAY))
             } else {
               // 不能选大于当天的数据
               return time > nowData
@@ -288,9 +292,7 @@
         totalCount: 0,                         // 总数
         dataList: [],                          // 签约人群List
         sign_check: false,                    // 详情查看权限
-        ORDERSTATUS: '',                      // 被查看单的签约状态
-        ISFAMILYRECORDAUDITED: '',            // 被查看单的家庭档案状态
-        ISMEMBERRECORDAUDITED: '',            // 被查看单的家庭成员状态
+        ORDERSTATUS: ''                      // 被查看单的签约状态
       }
     },
     watch:{
@@ -433,6 +435,7 @@
       },
       /**
        * 初始化数据
+       * @param val 页码
        */
       initData() {
         const {
@@ -440,6 +443,9 @@
           accountVal, identityCardVal, personCategoryVal, signIdentityCardVal, doctorTeamVal,
           pageSize, pageNo, applyDateVal, applyEndDateVal, approvalDateVal, approvalEndDateVal, signSate
         } = this;
+        // 重置为默认的第一页
+        this.pageNo = 1;
+        Object.assign(SEARCH_OBJ, this);
         this.$post('family/sign/order/getPage', {
           PROVINCEID: provinceId,
           CITYID: cityId,
@@ -455,11 +461,55 @@
           // RQFLID: personCategoryVal,
           BEGINSQRQ: applyDateVal,
           ENDSQRQ: applyEndDateVal,
-          BEGINQYRQ: approvalDateVal,
-          ENDQYRQ: approvalEndDateVal,
+          BEGINSPRQ: approvalDateVal,
+          ENDSPRQ: approvalEndDateVal,
           ORDERSTATUS: signSate,
           pageSize,
-          pageNo
+          pageNo: 1
+        }).then(rsp => {
+          this.totalCount = rsp.total;
+          // 家庭编号缩略
+          rsp.datas.forEach(item=>{
+            item.JTIDSTR = util.secretData(item.JTID, 'num');
+          });
+          this.dataList = rsp.datas;
+        }, rej => {
+          if(rej.data.errcode === 460){
+            this.$message.error(rej.data.datas[0].message);
+          }else{
+            this.$message.error(rej.data.errmsg);
+          }})
+      },
+      /**
+       * 页码变更查询
+       * @param val 页码
+       */
+      pageNoSearch(val){
+        const {
+          provinceId, cityId, areaId, medicalInsVal, doctorTeamId, doctorName, signNameVal,
+          accountVal, identityCardVal, personCategoryVal, signIdentityCardVal, doctorTeamVal,
+          pageSize, pageNo, applyDateVal, applyEndDateVal, approvalDateVal, approvalEndDateVal, signSate
+        } = SEARCH_OBJ;
+        this.$post('family/sign/order/getPage', {
+          PROVINCEID: provinceId,
+          CITYID: cityId,
+          DISTRICTID: areaId,
+          ORGNAME: medicalInsVal,
+          // TEAMID: doctorTeamId,
+          TEAMNAME: doctorTeamVal,
+          DOCTORNAME: doctorName,
+          HZXM: accountVal,
+          HZSFZJH: identityCardVal,
+          CYXM: signNameVal,
+          CYSFZJH: signIdentityCardVal,
+          // RQFLID: personCategoryVal,
+          BEGINSQRQ: applyDateVal,
+          ENDSQRQ: applyEndDateVal,
+          BEGINSPRQ: approvalDateVal,
+          ENDSPRQ: approvalEndDateVal,
+          ORDERSTATUS: signSate,
+          pageSize,
+          pageNo: val
         }).then(rsp => {
           this.totalCount = rsp.total;
           // 家庭编号缩略
@@ -487,7 +537,7 @@
        */
       handleCurrentChange(val) {
         this.pageNo = val;
-        this.initData();
+        this.pageNoSearch(val);
       },
       /**
        * 打开家庭具体信息
@@ -495,12 +545,10 @@
        * @param ORDERSTATUS 签约单状态
        * @param QYID 签约Id
        */
-      handleDetailInfo(JTID, ORDERSTATUS, QYID, ISFAMILYRECORDAUDITED, ISMEMBERRECORDAUDITED) {
+      handleDetailInfo(JTID, ORDERSTATUS, QYID) {
         this.JTID = JTID;
         this.ORDERSTATUS = ORDERSTATUS;
         this.QYID = QYID;
-        this.ISFAMILYRECORDAUDITED = ISFAMILYRECORDAUDITED;
-        this.ISMEMBERRECORDAUDITED = ISMEMBERRECORDAUDITED;
         this.toggleMainContent()
       }
     },

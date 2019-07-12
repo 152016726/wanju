@@ -10,9 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-decoupled-document": "^12.1.0",
-    "@ckeditor/ckeditor5-highlight": "^11.0.1",
-    "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
+    "@tinymce/tinymce-vue": "^2.1.0",
     "ajv": "^6.9.1",
     "axios": "^0.18.0",
     "echarts": "^4.2.1",
@@ -25,6 +23,7 @@
     "style-loader": "^0.23.1",
     "timer": "0.0.2",
     "timer.js": "^1.0.4",
+    "tinymce": "^5.0.11",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0"

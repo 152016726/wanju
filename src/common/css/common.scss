@@ -96,7 +96,7 @@ html {
 }
 
 body {
-  font-family: MicrosoftYaHei;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   font-size: 16px;
   color: #3F4457;
   background-color: #fff;
@@ -198,7 +198,7 @@ em {
 /* 外部盒子主样式 */
 #app {
   width: 100%;
-  min-width: 1366px;
+  min-width: 1024Px;
   left: 0;
   right: 0;
   margin: 0;
@@ -211,6 +211,7 @@ em {
     -webkit-transform-origin: center !important;
     transform-origin:center !important;
   }
+  border: 1px solid #dddddd !important;
 }
 .el-input__icon{
   transition: none !important;
@@ -222,6 +223,7 @@ em {
 .el-input__inner{
   transition: none !important;
   -webkit-transition: none !important;
+  border-width: 1px!important;
 }
 .el-input__suffix{
   transition: none !important;
@@ -233,21 +235,98 @@ em {
 .el-loading-spinner{
   width: 200px !important;
   height: 200px !important;
-  border-radius: 6px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 6px!important;
+  left: 50%!important;
+  top: 50%!important;
+  transform: translate(-50%, -50%)!important;
+  -ms-transform: translate(-50%, -50%)!important;
+  -webkit-transform: translate(-50%, -50%)!important;
+  -o-transform: translate(-50%, -50%)!important;
+  -moz-transform: translate(-50%, -50%)!important;
+  background-color: rgba(0, 0, 0, 0.7)!important;
+  display: flex!important;
+  flex-direction: column!important;
+  justify-content: center!important;
 }
 .pagination{
   margin-top: 30px;
+}
+
+.el-submenu__title {
+  padding: 0 10px !important;
+  font-size: 18px !important;
+  height: 40px;
+  line-height: 40px;
+
+  &:hover {
+    background-color: #4486FF !important;
+  }
+}
+
+.el-submenu .el-menu-item {
+  min-width: 100px !important;
+  padding: 0 0 !important;
+  height: 40px;
+  line-height: 40px;
+}
+
+.el-menu-item-group__title {
+  padding: 0 0 !important;
+}
+
+.el-submenu__icon-arrow {
+  right: 10px !important;
+}
+
+.el-submenu__title i {
+  color: #ffffff !important;
+}
+
+.el-submenu__title span {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 10px;
+}
+
+.el-pagination{
+  .el-pager{
+    .active{
+      background-color: #4486ff!important;
+    }
+  }
+}
+.el-button--primary{
+  background-color: #4486ff!important;
+}
+.el-button--danger{
+  background-color: #f65860!important;
+}
+.el-button--info{
+  color: #ffffff!important;
+  background-color: #bbbbbb!important;
+}
+
+.el-button{
+  line-height: 30px;
+  text-align: center;
+  padding: 0 0!important;
+  border:none !important;
+  width: 95px;
+  height: 30px;
+  font-size: 16px;
+}
+.el-textarea__inner{
+  border:1px solid #dddddd!important;
+}
+.el-message-box__btns{
+  .el-button--default{
+    &:nth-child(1){
+      background-color: #bbbbbb;
+      color:#ffffff;
+    }
+  }
 }
 
 /*css初始化完成*/

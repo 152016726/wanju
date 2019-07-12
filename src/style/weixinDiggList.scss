@@ -1,9 +1,18 @@
 .weixinDiggList{
   padding: 30px 20px 10px 20px;
-  background-color: #F0F2F5;
+  height: 100%;
   box-sizing: border-box;
+  .flexBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    height: 100%;
+    box-sizing: border-box;
+  }
   .weixinDiggTitle{
     display: flex;
+    background-color: #F0F2F5;
     .commonTextInput, .commonSelect{
       margin-right: 30px;
     }

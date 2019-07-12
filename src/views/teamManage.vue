@@ -1,74 +1,78 @@
 <template>
   <div class="teamManage">
-    <div class="teamSearch">
-      <commonTextInput :text="'全国机构'" v-model="orgName"></commonTextInput>
-      <commonTextInput :text="'医生团队'" v-model="TDMC"></commonTextInput>
-      <commonTextInput :text="'医生姓名'" v-model="YSXM"></commonTextInput>
-      <commonSelector :text="'状态'" v-model="ISENABLED" :options="stateList"></commonSelector>
-      <el-button type="primary" class="major" @click.stop.prevent="searchTeamInfo">查询</el-button>
-    </div>
-    <div class="roleManageContent">
-      <div class="personTitle">
-        <p class="title">团队列表</p>
-        <div class="functionBtns">
-          <el-button type="success" class="major" v-if="team_upload" @click.stop.prevent="">导入</el-button>
-          <el-button type="primary" class="major" v-if="team_add" @click.stop.prevent="openTeamDialog('')">新增
-          </el-button>
+    <div class="flexBox">
+      <div>
+        <div class="teamSearch">
+          <commonTextInput :text="'全国机构'" v-model="orgName"></commonTextInput>
+          <commonTextInput :text="'医生团队'" v-model="TDMC"></commonTextInput>
+          <commonTextInput :text="'医生姓名'" v-model="YSXM"></commonTextInput>
+          <commonSelector :text="'状态'" v-model="ISENABLED" :options="stateList"></commonSelector>
+          <el-button type="primary" class="major" @click.stop.prevent="searchTeamInfo">查询</el-button>
         </div>
-      </div>
-      <div class="personContent">
-        <div class="personTable">
-          <div class="tableHeader">
-            <div class="tableCell index">序号</div>
-            <div class="tableCell name">团队名称</div>
-            <!--<div class="tableCell code">团队编码</div>-->
-            <div class="tableCell organization">机构名称</div>
-            <div class="tableCell leader">队长</div>
-            <div class="tableCell count">团队人数</div>
-            <div class="tableCell state">状态</div>
-            <div class="tableCell handle">操作</div>
+        <div class="roleManageContent">
+          <div class="personTitle">
+            <p class="title">团队列表</p>
+            <div class="functionBtns">
+              <!--<el-button type="success" class="major" v-if="team_upload" @click.stop.prevent="">导入</el-button>-->
+              <el-button type="primary" class="major" v-if="team_add" @click.stop.prevent="openTeamDialog('')">新增
+              </el-button>
+            </div>
           </div>
-          <div class="tableRow" v-for="(item, index) in dataList" :key="index">
-            <div class="tableCell">{{index+1}}</div>
-            <div class="tableCell">{{item.TDMC}}</div>
-            <!--<div class="tableCell"></div>-->
-            <div class="tableCell">{{item.ORGNAME}}</div>
-            <div class="tableCell">{{item.DZXM}}</div>
-            <div class="tableCell">{{item.CYSL}}</div>
-            <div class="tableCell">{{item.ISENABLED ? '启动': '禁用'}}</div>
-            <div class="tableCell">
-              <el-button type="primary" class="major" v-if="team_edit" @click.prevent.stop="openTeamDialog(item.TDID)">
-                编辑团队
-              </el-button>
-              <el-button type="primary" class="major" v-if="team_edit"
-                         @click.prevent.stop="openMemberDialog(item.TDID, item.ORGID)">编辑成员
-              </el-button>
-              <el-button type="primary" class="major" v-if="team_edit"
-                         @click.prevent.stop="disabledTeam(item.TDID, !item.ISENABLED)">
-                {{item.ISENABLED ? '禁用': '启动'}}
-              </el-button>
-              <el-button type="danger" class="major" v-if="team_delete" @click.prevent.stop="handleDelete(item.TDID)">
-                删除
-              </el-button>
-              <span v-if="!team_delete && !team_edit">暂无编辑权限</span>
+          <div class="personContent">
+            <div class="personTable">
+              <div class="tableHeader">
+                <div class="tableCell index">序号</div>
+                <div class="tableCell name">团队名称</div>
+                <!--<div class="tableCell code">团队编码</div>-->
+                <div class="tableCell organization">机构名称</div>
+                <div class="tableCell leader">队长</div>
+                <div class="tableCell count">团队人数</div>
+                <div class="tableCell state">状态</div>
+                <div class="tableCell handle">操作</div>
+              </div>
+              <div class="tableRow" v-for="(item, index) in dataList" :key="index">
+                <div class="tableCell">{{index+1}}</div>
+                <div class="tableCell">{{item.TDMC}}</div>
+                <!--<div class="tableCell"></div>-->
+                <div class="tableCell">{{item.ORGNAME}}</div>
+                <div class="tableCell">{{item.DZXM}}</div>
+                <div class="tableCell">{{item.CYSL}}</div>
+                <div class="tableCell">{{item.ISENABLED ? '启动': '禁用'}}</div>
+                <div class="tableCell">
+                  <el-button type="primary" class="major" v-if="team_edit" @click.prevent.stop="openTeamDialog(item.TDID)">
+                    编辑团队
+                  </el-button>
+                  <el-button type="primary" class="major" v-if="team_edit"
+                             @click.prevent.stop="openMemberDialog(item.TDID, item.ORGID)">编辑成员
+                  </el-button>
+                  <el-button type="primary" class="major" v-if="team_edit"
+                             @click.prevent.stop="disabledTeam(item.TDID, !item.ISENABLED)">
+                    {{item.ISENABLED ? '禁用': '启动'}}
+                  </el-button>
+                  <el-button type="danger" class="major" v-if="team_delete" @click.prevent.stop="handleDelete(item.TDID)">
+                    删除
+                  </el-button>
+                  <span v-if="!team_delete && !team_edit">暂无编辑权限</span>
+                </div>
+              </div>
+            </div>
+            <div class="noneData" v-if="dataList.length === 0">
+              暂无数据
             </div>
           </div>
         </div>
-        <div class="noneData" v-if="dataList.length === 0">
-          暂无数据
-        </div>
-        <div class="pagination">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="pageNo"
-            :page-sizes="[10, 20, 50, 100]"
-            :page-size="pageSize"
-            layout=" prev, pager, next,total, sizes, jumper"
-            background
-            :total="totalCount">
-          </el-pagination>
-        </div>
+      </div>
+      <div class="pagination">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="pageNo"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pageSize"
+          layout=" prev, pager, next,total, sizes, jumper"
+          background
+          :total="totalCount">
+        </el-pagination>
       </div>
     </div>
     <!-- 是否删除角色开始 -->
@@ -126,6 +130,8 @@
   import commonDialog from '@/components/commonDialog';                            // 公共弹窗
   import addNewTeamMember from '@/components/addNewTeamMember';                   // 添加团队成员
   import commonTextArea from '@/components/commonTextArea';                       // 文本输入框
+
+  let SEARCH_OBJ = {};                                                            // 搜查对象
 
   export default {
     name: "teamManage",
@@ -237,9 +243,30 @@
        * 按照条件搜索信息
        */
       searchTeamInfo() {
-        const {orgName, TDMC, YSXM, ISENABLED, pageSize, pageNo} = this;
+        const {orgName, TDMC, YSXM, ISENABLED, pageSize} = this;
+        Object.assign(SEARCH_OBJ, this);
+        // 重置为默认的第一页
+        this.pageNo = 1;
         this.$post('family/teamAndMember/getPage', {
-          orgName, TDMC, YSXM, ISENABLED, pageSize, pageNo
+          orgName, TDMC, YSXM, ISENABLED, pageSize, pageNo: 1
+        }).then(rsp => {
+          this.dataList = rsp.datas;
+          this.totalCount = rsp.total;
+        }, rej => {
+          if(rej.data.errcode === 460){
+            this.$message.error(rej.data.datas[0].message);
+          }else{
+            this.$message.error(rej.data.errmsg);
+          }})
+      },
+      /**
+       * 页码变更查询
+       * @param val 页码
+       */
+      pageNoSearch(val){
+        const {orgName, TDMC, YSXM, ISENABLED, pageSize} = SEARCH_OBJ;
+        this.$post('family/teamAndMember/getPage', {
+          orgName, TDMC, YSXM, ISENABLED, pageSize, pageNo: val
         }).then(rsp => {
           this.dataList = rsp.datas;
           this.totalCount = rsp.total;
@@ -305,7 +332,7 @@
        */
       handleCurrentChange(val) {
         this.pageNo = val;
-        this.searchTeamInfo();
+        this.pageNoSearch(val);
       }
     },
     created() {

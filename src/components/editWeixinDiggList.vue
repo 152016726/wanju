@@ -292,6 +292,15 @@
 </script>
 
 <style lang="scss">
+  @media screen and (max-width: 1300px){
+    .editWeixinDiggList .editWeixinDiggListContent{
+      .teamIntro, .commonAutocomplete, .commonTextInput, .uploadText,.commonSelector {
+        .iconText, .intro{
+          width: 140px;
+        }
+      }
+    }
+  }
   .editWeixinDiggList {
     padding: 0 83px;
 
@@ -386,7 +395,7 @@
       line-height: 30px;
       text-align: center;
       color: #BABABA;
-      border: 1Px solid #DDDDDD;
+      border: 1px solid #DDDDDD;
       box-sizing: border-box;
       display: block;
     }

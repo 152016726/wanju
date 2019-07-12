@@ -147,29 +147,17 @@
         this.toggleContent(-1);
       },
       /**
-       * 头像上传成功
-       * @param res
-       * @param file
-       */
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      /**
        * 头像上传限制
        * @param file
        * @returns {boolean}
        */
       beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isLt5M = file.size / 1024 / 1024 < 5;
 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
+        if (!isLt5M) {
+          this.$message.error('上传头像图片大小不能超过 5MB!');
         }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
+        return isLt5M;
       },
       /**
        * 开关弹窗
@@ -334,6 +322,16 @@
 </script>
 
 <style lang="scss">
+  @media screen and (max-width: 1300px){
+      .addNewTeam .addNewTeamContent{
+        .intro,.iconText{
+          width: 90px!important;
+        }
+        .assignDialogFooter{
+          padding-left: 90px!important;
+        }
+      }
+  }
   .addNewTeam {
     font-size: 16px;
 
@@ -494,19 +492,15 @@
         }
       }
 
-
     }
 
     .assignDialogFooter {
       margin: 0 auto;
-      padding-top: 30px;
+      padding-left:75px;
+      text-indent: 0;
 
       .el-button {
         margin: 0 10px;
-        padding: 0 0;
-        width: 86px;
-        height: 30px;
-        font-size: 16px;
       }
     }
 

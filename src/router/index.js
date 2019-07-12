@@ -11,11 +11,12 @@ import memberManage from '@/views/memberManage'                  // 成员管理
 import weixinDiggList from '@/views/weixinDiggList'              // 公众号列表
 import weixinDiggInfo from '@/views/weixinDiggInfo'              // 公众号资讯
 import login from '@/views/login'                                // 登陆
+import version from '@/views/version'                            // 版本
 
 Vue.use(Router)
 
 const defRouter = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {name: 'login', path: '/login', component: login},
     // {
@@ -66,22 +67,22 @@ const defRouter = new Router({
         order: '2-0'
       }
     },
-    {
-      path: '/weixinDiggList',
-      name: 'weixinDiggList',
-      component: weixinDiggList,
-      meta: {
-        order: '3-0'
-      }
-    },
-    {
-      path: '/weixinDiggInfo',
-      name: 'weixinDiggInfo',
-      component: weixinDiggInfo,
-      meta: {
-        order: '3-1'
-      }
-    },
+    // {
+    //   path: '/weixinDiggList',
+    //   name: 'weixinDiggList',
+    //   component: weixinDiggList,
+    //   meta: {
+    //     order: '3-0'
+    //   }
+    // },
+    // {
+    //   path: '/weixinDiggInfo',
+    //   name: 'weixinDiggInfo',
+    //   component: weixinDiggInfo,
+    //   meta: {
+    //     order: '3-1'
+    //   }
+    // },
     // {
     //   path: '/404',
     //   name: '404',
@@ -90,6 +91,14 @@ const defRouter = new Router({
     //     order: '404'
     //   }
     // },
+    {
+      path: '/version',
+      name: 'version',
+      component: version,
+      meta:{
+        order:'3-0'
+      }
+    },
     {
       path: "*",
       name: '404',

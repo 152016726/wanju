@@ -1,4 +1,4 @@
-const url = 'http://192.168.1.242/admin';
+const url = 'http://14.23.70.230:6001/admin';
 
 let ROOT;
 

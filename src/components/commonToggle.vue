@@ -45,7 +45,7 @@
     .assignSignerTitle {
       cursor: pointer;
       text-align: left;
-      border: 1Px solid #DDDDDD;
+      border: 1px solid #DDDDDD;
       border-top: none;
       display: flex;
       align-items: center;
@@ -56,7 +56,7 @@
         border-bottom: none;
       }
       &.borderTop{
-        border-top: 1Px solid #DDDDDD;
+        border-top: 1px solid #DDDDDD;
       }
       &.borderNone{
         border: none;

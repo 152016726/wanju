@@ -8,26 +8,26 @@
     </div>
     <!-- 个人信息开始 -->
     <div class="assignBaseInfoInput clearfix">
-      <div class="col-1 fl">
+      <div class="col-1 item fl">
         <commonTextInput v-model="JDJGMC" :text="'建档单位'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="YHZGXMC" :text="'关系'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="XB" :text="'性别'" :isDisabled="true" :placeholderText="''"></commonTextInput>
         <commonTextInput v-model="HYZKMC" :text="'婚姻状况'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
       </div>
-      <div class="col-2 fl">
+      <div class="col-2 item fl">
         <commonTextInput v-model="GDJGMC" :text="'存档单位'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="XM" :text="'居民姓名'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="BRDHHM" :text="'手机号码'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="ZYMC" :text="'职业'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
       </div>
-      <div class="col-3 fl">
+      <div class="col-3 item fl">
         <commonTextInput v-model="JDRMC" :text="'建档人'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="SFZJH" :text="'身份证号'" :isDisabled="isEditInfo || isDisabled" :errorTips="'身份证号码格式错误'"
                          :errorState="SFZJHState"></commonTextInput>
-        <commonTextInput v-model="MZMC" :text="'名族'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
+        <commonTextInput v-model="MZMC" :text="'民族'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="signName" :text="'签约人姓名'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
       </div>
-      <div class="col-4 fl">
+      <div class="col-4 item fl">
         <commonTextInput v-model="ZRYSMC" :text="'责任医生'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="bornDate" :text="'出生日期'" :isDisabled="true" :placeholderText="''"></commonTextInput>
         <commonTextInput v-model="ABOMC" :text="'血型'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
@@ -40,11 +40,11 @@
     <div class="contentAddress">
       <commonAreaSelector
         :text="'户籍地址'"
-        :province.sync="HJDZPROVINCEDID"
-        :city.sync="HJDZCITYID"
-        :area.sync="HJDZDISTRICTID"
-        :street.sync="HJDZSTREETID"
-        :village.sync="HJDZCOMMITTEEID"
+        :province.sync="isEditInfo || isDisabled ? HJDZPROVINCEDNAME : HJDZPROVINCEDID"
+        :city.sync="isEditInfo || isDisabled ? HJDZCITYNAME : HJDZCITYID"
+        :area.sync="isEditInfo || isDisabled ? HJDZDISTRICTNAME : HJDZDISTRICTID"
+        :street.sync="isEditInfo || isDisabled ? HJDZSTREETNAME : HJDZSTREETID"
+        :village.sync="isEditInfo || isDisabled ? HJDZCOMMITTEENAME : HJDZCOMMITTEEID"
         :address.sync="HJDZXXDZ"
         :isDisabled="isEditInfo || isDisabled"
       >
@@ -52,23 +52,23 @@
 
       <commonAreaSelector
         :text="'现住地址'"
-        :province.sync="XZZPROVINCEDID"
-        :city.sync="XZZCITYID"
-        :area.sync="XZZDISTRICTID"
-        :street.sync="XZZSTREETID"
-        :village.sync="XZZCOMMITTEEID"
+        :province.sync="isEditInfo || isDisabled ? XZZPROVINCEDNAME : XZZPROVINCEDID"
+        :city.sync="isEditInfo || isDisabled ? XZZCITYNAME : XZZCITYID"
+        :area.sync="isEditInfo || isDisabled ? XZZDISTRICTNAME : XZZDISTRICTID"
+        :street.sync="isEditInfo || isDisabled ? XZZSTREETNAME : XZZSTREETID"
+        :village.sync="isEditInfo || isDisabled ? XZZCOMMITTEENAME : XZZCOMMITTEEID"
         :address.sync="XZZXXDZ"
         :isDisabled="isEditInfo || isDisabled"
       >
       </commonAreaSelector>
 
       <commonAreaSelector
-        :text="'现住地址'"
-        :province.sync="XZZPROVINCEDID"
-        :city.sync="XZZCITYID"
-        :area.sync="XZZDISTRICTID"
-        :street.sync="XZZSTREETID"
-        :village.sync="XZZCOMMITTEEID"
+        :text="'网格地址'"
+        :province.sync="isEditInfo || isDisabled ? XZZPROVINCEDNAME : XZZPROVINCEDID"
+        :city.sync="isEditInfo || isDisabled ? XZZCITYNAME : XZZCITYID"
+        :area.sync="isEditInfo || isDisabled ? XZZDISTRICTNAME : XZZDISTRICTID"
+        :street.sync="isEditInfo || isDisabled ? XZZSTREETNAME : XZZSTREETID"
+        :village.sync="isEditInfo || isDisabled ? XZZCOMMITTEENAME : XZZCOMMITTEEID"
         :address.sync="XZZXXDZ"
         :isDisabled="isEditInfo || isDisabled"
       >
@@ -84,7 +84,7 @@
         <commonTextInput v-model="YWGMSMC" :text="'过敏史'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
         <commonTextInput v-model="BLSLBMC" :text="'暴露史'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
       </div>
-      <commonTextInput v-model="disability" :text="'残疾情况'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
+      <commonTextInput v-model="CJQKLBMC" :text="'残疾情况'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
     </div>
     <!-- 个人病史结束 -->
 
@@ -142,23 +142,33 @@
         illnessName: '',              // 疾病名称
         approvalDate: '',             // 确诊时间
         clinicHospital: '',           // 就诊医院
-        disability: '',               // 残疾情况
+        CJQKLBMC: '',               // 残疾情况
         JZSFQJBLBMC: '',              // 父亲病史
         JZSMQJBLBMC: '',              // 母亲病史
         JZSXDJMJBLBMC: '',            // 兄弟姐妹病史
         JZSZNJBLBMC: '',              // 儿女病史
         YCSJBDMMC: '',                // 遗传病史
         XZZPROVINCEDID: '',           // 现住址省ID
+        XZZPROVINCEDNAME: '',         // 现住址省
         XZZCITYID: '',                // 现住址市ID
+        XZZCITYNAME: '',              // 现住址市
         XZZDISTRICTID: '',            // 现住址区ID
+        XZZDISTRICTNAME: '',          // 现住址区
         XZZCOMMITTEEID: '',           // 现住址村ID
+        XZZCOMMITTEENAME: '',         // 现住址村
         XZZSTREETID: '',              // 现住址街道ID
+        XZZSTREETNAME: '',            // 现住址街道
         XZZXXDZ: '',                  // 现住址详细地址
         HJDZPROVINCEDID: '',          // 户籍地址省ID
+        HJDZPROVINCEDNAME: '',        // 户籍地址省
         HJDZCITYID: '',               // 户籍地址市ID
+        HJDZCITYNAME: '',             // 户籍地址市
         HJDZDISTRICTID: '',           // 户籍地址区ID
+        HJDZDISTRICTNAME: '',         // 户籍地址区
         HJDZSTREETID: '',             // 户籍地址街道ID
+        HJDZSTREETNAME: '',           // 户籍地址街道
         HJDZCOMMITTEEID: '',          // 户籍地址村ID
+        HJDZCOMMITTEENAME: '',        // 户籍地址村
         HJDZXXDZ: ''                  // 户籍地址详细地址
       }
     },
@@ -194,9 +204,50 @@
 </script>
 
 <style lang="scss">
+  @media screen and (max-width: 1300px){
+    // 基本资料
+    .assignBaseInfo .assignBaseInfoInput .item {
+      .commonTextInput, .commonDatePicker, .commonSelector{
+        .iconText{
+          width: 107px;
+        }
+        .inputType, .datepicker, .selection{
+          width: 170px;
+        }
+      }
+      &.col-3{
+        .iconText{
+          width: 120px;
+        }
+      }
+      &.col-4{
+        .iconText{
+          width: 135px;
+        }
+      }
+    }
+    // 地址
+    .assignBaseInfo .contentAddress .commonAreaSelector{
+        .address{
+          .commonTextInput .commonTextInputContent .inputType{
+            width: 200px;
+          }
+        }
+      .areaSelectorTitle{
+        width: 107px!important;
+      }
+    }
+    // 个人病史
+    .assignBaseInfo .assignPersonInfo .illnessHistory .commonTextInput .iconText{
+        width: 88px;
+    }
+    .assignBaseInfo .assignHomeInfo .assignHomeContent .commonTextInput:nth-child(4n){
+      margin-right: 30px !important;
+    }
+  }
   .assignBaseInfo {
     &.borderBottom {
-      border-bottom: 1Px solid #DDDDDD;
+      border-bottom: 1px solid #DDDDDD;
     }
 
     .assignBaseHeader {
@@ -254,6 +305,13 @@
         .iconText {
           width: 107px;
         }
+      }
+    }
+
+    .contentAddress{
+      .commonAreaSelector .areaSelectorTitle{
+          width: 75px;
+          text-align: right;
       }
     }
 

@@ -181,7 +181,6 @@
         this.roleList.some(item => {
           if (item.value === val) {
             this.roleType = item.roleType;
-            console.log(this.roleType, '123');
             if (SPECIAL_ROLE.indexOf(item.roleType) !== -1) {
               this.isShowArea = true;
             } else {
@@ -386,6 +385,15 @@
 </script>
 
 <style lang="scss">
+  @media screen and (max-width: 1300px){
+    .addNewAccount .addNewAccountContent{
+      .commonTextInput, .commonCascader, .commonSelector{
+        .iconText{
+          width: 90px;
+        }
+      }
+    }
+  }
   .addNewAccount {
     .assignDialogTitle {
       width: 100%;

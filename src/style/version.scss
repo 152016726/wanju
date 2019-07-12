@@ -1,0 +1,135 @@
+.versionList{
+  width: 100%;
+  //min-height: 760px;
+  //max-height: 912px;
+  padding: 18px 18px;;
+  height: 100%;
+  box-sizing: border-box;
+  .noneData{
+    text-align: center;
+    color: #ADB0B5;
+    line-height: 50px;
+    font-size: 16px;
+  }
+  .paddingBox {
+    padding: 30px 0;
+    .iconText{
+      width: 85px;
+      margin-right: 10px;
+    }
+  }
+  .flexBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 0 18px;;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    &::before {
+      position: absolute;
+      display: block;
+      content: "";
+      width: 10px;
+      height: 4px;
+      top: 28px;
+      left: 0;
+      background-color: #4486FF;
+    }
+  }
+  .pagination{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  .versionTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title{
+      line-height: 60px;
+      color: #3F4457;
+      font-size: 16px;
+    }
+    .functionBtns{
+      margin-right: 22px;
+      .major{
+        width: 80px;
+        height: 30px;
+        padding: 0 0;
+        margin: 0 0;
+
+        span {
+          line-height: 30px;
+        }
+      }
+    }
+  }
+  .versionTable{
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+    border:1px solid #DDDDDD;
+    border-collapse: collapse;
+
+    .major {
+      width: 80px;
+      height: 30px;
+      padding: 0 0;
+      margin: 0 0;
+
+      span {
+        line-height: 30px;
+      }
+    }
+
+    .tableCell {
+      height: 50px;
+      text-align: center;
+      font-size: 16px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      display: table-cell;
+      >div{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        //word-break: break-all;
+        white-space: nowrap;
+      }
+    }
+    .tableHeader {
+      display: table-header-group;
+      border-bottom: 1px solid #DDDDDD;
+      background-color: #F3F3F3;
+      color: #666666;
+      box-sizing: border-box;
+      .tableCell{
+        height: 38px;
+      }
+    }
+    .tableRow{
+      display: table-row;
+      border-bottom: 1px solid #DDDDDD;
+      box-sizing: border-box;
+    }
+    .index{
+      width: 5%;
+    }
+    .appName{
+      width: 10%;
+    }
+    .newVersion, .curVersion{
+      width: 13%;
+    }
+    .handle{
+      width: 16%;
+    }
+    .updateInfo{
+      width: 27%;
+    }
+    .publishTime{
+      width: 16%;
+    }
+  }
+}

@@ -1,55 +1,59 @@
 <template>
   <div class="weixinDiggList">
-    <div class="weixinDiggTitle">
-      <commonTextInput :text="'机构名称'" v-model="orgName"></commonTextInput>
-      <commonTextInput :text="'公众号名称'" v-model="appName"></commonTextInput>
-      <commonSelector :text="'状态'" :options="stateList" v-model="isEnabled"></commonSelector>
-      <el-button type="primary" class="major" @click.prevent.stop="searchDiggList">查询</el-button>
-    </div>
-    <div class="weixinDiggList">
-      <div class="weixinDiggTitle">
-        <p class="title">公众号列表</p>
-        <div class="functionBtns">
-          <el-button type="success" class="major" v-if="wx_secret_upload" @click.stop.prevent="">导入</el-button>
-          <el-button type="primary" class="major" v-if="wx_secret_add" @click.stop.prevent="openDiggInfo('')">新增</el-button>
+    <div class="flexBox">
+      <div>
+        <div class="weixinDiggTitle">
+          <commonTextInput :text="'机构名称'" v-model="orgName"></commonTextInput>
+          <commonTextInput :text="'公众号名称'" v-model="appName"></commonTextInput>
+          <commonSelector :text="'状态'" :options="stateList" v-model="isEnabled"></commonSelector>
+          <el-button type="primary" class="major" @click.prevent.stop="searchDiggList">查询</el-button>
         </div>
-      </div>
-      <div class="weixinDiggTable">
-        <div class="tableHeader">
-          <div class="tableCell index">序号</div>
-          <div class="tableCell organization">机构名称</div>
-          <div class="tableCell commonPackage">公众号名称</div>
-          <div class="tableCell levelPackage">创建时间</div>
-          <div class="tableCell diyPackage">状态</div>
-          <div class="tableCell handle">操作</div>
+        <div class="weixinDiggList">
+          <div class="weixinDiggTitle">
+            <p class="title">公众号列表</p>
+            <div class="functionBtns">
+              <el-button type="success" class="major" v-if="wx_secret_upload" @click.stop.prevent="">导入</el-button>
+              <el-button type="primary" class="major" v-if="wx_secret_add" @click.stop.prevent="openDiggInfo('')">新增</el-button>
+            </div>
+          </div>
+          <div class="weixinDiggTable">
+            <div class="tableHeader">
+              <div class="tableCell index">序号</div>
+              <div class="tableCell organization">机构名称</div>
+              <div class="tableCell commonPackage">公众号名称</div>
+              <div class="tableCell levelPackage">创建时间</div>
+              <div class="tableCell diyPackage">状态</div>
+              <div class="tableCell handle">操作</div>
+            </div>
+            <div class="tableRow" v-for="(item, index) in dataList" :key="index">
+              <div class="tableCell index">
+                <div>{{index+1}}</div>
+              </div>
+              <div class="tableCell organization">
+                <div>{{item.orgName }}</div>
+              </div>
+              <div class="tableCell commonPackage">
+                <div>{{item.appName}}</div>
+              </div>
+              <div class="tableCell levelPackage">
+                <div>{{item.createTime}}</div>
+              </div>
+              <div class="tableCell diyPackage">
+                <div>{{item.isEnabled ? '启用' : '禁用'}}</div>
+              </div>
+              <div class="tableCell handle">
+                <el-button type="primary" class="major" v-if="wx_secret_edit" @click.prevent.stop="openDiggInfo(item.wxConfigId)">编辑</el-button>
+                <el-button type="primary" class="major" v-if="wx_secret_edit" @click.prevent.stop="disabledApp(item.wxConfigId, !item.isEnabled)">
+                  {{item.isEnabled ? '禁用' : '启用'}}
+                </el-button>
+                <span v-if="!wx_secret_edit">暂无权限编辑</span>
+              </div>
+            </div>
+          </div>
+          <div class="noneData" v-if="dataList.length === 0">
+            暂无数据
+          </div>
         </div>
-        <div class="tableRow" v-for="(item, index) in dataList" :key="index">
-          <div class="tableCell index">
-            <div>{{index+1}}</div>
-          </div>
-          <div class="tableCell organization">
-            <div>{{item.orgName }}</div>
-          </div>
-          <div class="tableCell commonPackage">
-            <div>{{item.appName}}</div>
-          </div>
-          <div class="tableCell levelPackage">
-            <div>{{item.createTime}}</div>
-          </div>
-          <div class="tableCell diyPackage">
-            <div>{{item.isEnabled ? '启用' : '禁用'}}</div>
-          </div>
-          <div class="tableCell handle">
-            <el-button type="primary" class="major" v-if="wx_secret_edit" @click.prevent.stop="openDiggInfo(item.wxConfigId)">编辑</el-button>
-            <el-button type="primary" class="major" v-if="wx_secret_edit" @click.prevent.stop="disabledApp(item.wxConfigId, !item.isEnabled)">
-              {{item.isEnabled ? '禁用' : '启用'}}
-            </el-button>
-            <span v-if="!wx_secret_edit">暂无权限编辑</span>
-          </div>
-        </div>
-      </div>
-      <div class="noneData" v-if="dataList.length === 0">
-        暂无数据
       </div>
       <div class="pagination">
         <el-pagination
