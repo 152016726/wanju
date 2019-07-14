@@ -23,8 +23,20 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #ffffff;
-    padding: 0 18px;;
     height: 100%;
+    box-sizing: border-box;
+  }
+  .pagination{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  .versionContent{
+    width: 100%;
+    //min-height: 820px;
+    //max-height: 972px;
+    padding: 0 18px;
+    background-color: #ffffff;
     box-sizing: border-box;
     position: relative;
     &::before {
@@ -37,11 +49,6 @@
       left: 0;
       background-color: #4486FF;
     }
-  }
-  .pagination{
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
   }
   .versionTitle {
     display: flex;

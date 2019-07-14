@@ -1,49 +1,51 @@
 <template>
   <!-- 签约人群表格开始 -->
   <div class="roleManage">
-    <div class="roleManageContent">
+    <div class="flexBox">
       <div>
-        <div class="personTitle">
-          <p class="title">角色列表</p>
-          <el-button type="primary" class="major" v-if="role_add" @click.stop.prevent="openRoleDialog('')">新增角色
-          </el-button>
-        </div>
-        <div class="personContent">
-          <div class="personTable">
-            <div class="tableHeader">
-              <div class="tableCell index">序号</div>
-              <div class="tableCell name">角色名称</div>
-              <div class="tableCell nickname">角色别名</div>
-              <div class="tableCell createTime">创建时间</div>
-              <div class="tableCell state">状态</div>
-              <div class="tableCell handle">操作</div>
-            </div>
-            <div class="tableRow" v-for="(item, index) in dataList" :key="index">
-              <div class="tableCell">{{index+1}}</div>
-              <div class="tableCell">{{item.roleName}}</div>
-              <div class="tableCell">{{item.aliasName}}</div>
-              <div class="tableCell">{{item.createTime}}</div>
-              <div class="tableCell">{{item.isEnabled ? '启用' : '禁用'}}</div>
-              <div class="tableCell handle">
-                <el-button type="primary" class="major" v-if="role_edit"
-                           @click.prevent.stop="openRoleDialog(item.roleId)">编辑
-                </el-button>
-                <el-button type="primary" class="major" v-if="role_edit && S_ROLE.indexOf(item.roleType) === -1"
-                           @click.prevent.stop="disabledRole(item.roleId, !item.isEnabled)">{{item.isEnabled ? '禁用' :
-                  '启用'}}
-                </el-button>
-                <el-button type="danger" class="major" v-if="role_delete && S_ROLE.indexOf(item.roleType) === -1"
-                           @click.prevent.stop="deleteRoleDialog(item.roleId)"
-                           @keyup.enter="stopFalse"
-                >
-                  删除
-                </el-button>
-                <span v-if="!role_edit && !role_delete">暂无权限编辑</span>
+        <div class="roleManageContent">
+          <div class="personTitle">
+            <p class="title">角色列表</p>
+            <el-button type="primary" class="major" v-if="role_add" @click.stop.prevent="openRoleDialog('')">新增角色
+            </el-button>
+          </div>
+          <div class="personContent">
+            <div class="personTable">
+              <div class="tableHeader">
+                <div class="tableCell index">序号</div>
+                <div class="tableCell name">角色名称</div>
+                <div class="tableCell nickname">角色别名</div>
+                <div class="tableCell createTime">创建时间</div>
+                <div class="tableCell state">状态</div>
+                <div class="tableCell handle">操作</div>
+              </div>
+              <div class="tableRow" v-for="(item, index) in dataList" :key="index">
+                <div class="tableCell">{{index+1}}</div>
+                <div class="tableCell">{{item.roleName}}</div>
+                <div class="tableCell">{{item.aliasName}}</div>
+                <div class="tableCell">{{item.createTime}}</div>
+                <div class="tableCell">{{item.isEnabled ? '启用' : '禁用'}}</div>
+                <div class="tableCell handle">
+                  <el-button type="primary" class="major" v-if="role_edit"
+                             @click.prevent.stop="openRoleDialog(item.roleId)">编辑
+                  </el-button>
+                  <el-button type="primary" class="major" v-if="role_edit && S_ROLE.indexOf(item.roleType) === -1"
+                             @click.prevent.stop="disabledRole(item.roleId, !item.isEnabled)">{{item.isEnabled ? '禁用' :
+                    '启用'}}
+                  </el-button>
+                  <el-button type="danger" class="major" v-if="role_delete && S_ROLE.indexOf(item.roleType) === -1"
+                             @click.prevent.stop="deleteRoleDialog(item.roleId)"
+                             @keyup.enter="stopFalse"
+                  >
+                    删除
+                  </el-button>
+                  <span v-if="!role_edit && !role_delete">暂无权限编辑</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="noneData" v-if="dataList.length === 0">
-            暂无数据
+            <div class="noneData" v-if="dataList.length === 0">
+              暂无数据
+            </div>
           </div>
         </div>
       </div>

@@ -2,51 +2,53 @@
   <div class="versionList">
     <div class="flexBox">
       <div>
-        <div class="versionTitle">
-          <p class="title">版本管理</p>
-          <div class="functionBtns">
-            <el-button type="primary" class="major" v-if="version_add" @click.stop.prevent="openVersionInfo('')">更新
-            </el-button>
-          </div>
-        </div>
-        <div class="versionTable">
-          <div class="tableHeader">
-            <div class="tableCell index">序号</div>
-            <div class="tableCell appName">应用名称</div>
-            <div class="tableCell updateInfo">更新内容</div>
-            <div class="tableCell curVersion">版本号</div>
-            <div class="tableCell publishTime">发布时间</div>
-            <div class="tableCell handle">操作</div>
-          </div>
-          <div class="tableRow" v-for="(item, index) in dataList" :key="index">
-            <div class="tableCell index">
-              <div>{{index+1}}</div>
-            </div>
-            <div class="tableCell appName">
-              <div>{{item.appName }}</div>
-            </div>
-            <div class="tableCell updateInfo">
-              <div>{{item.content}}</div>
-            </div>
-            <div class="tableCell curVersion">
-              <div>{{item.versionCode}}</div>
-            </div>
-            <div class="tableCell publishTime">
-              <div>{{item.createTime}}</div>
-            </div>
-            <div class="tableCell handle">
-              <el-button type="primary" class="major" v-if="version_edit"
-                         @click.prevent.stop="openVersionInfo(item.appId, item)">编辑
+        <div class="versionContent">
+          <div class="versionTitle">
+            <p class="title">版本管理</p>
+            <div class="functionBtns">
+              <el-button type="primary" class="major" v-if="version_add" @click.stop.prevent="openVersionInfo('')">更新
               </el-button>
-              <el-button type="primary" class="major" v-if="version_delete" @click.prevent.stop="deleteVersion(item.appId)">
-                删除
-              </el-button>
-              <span v-if="!version_edit && !version_delete">暂无权限编辑</span>
             </div>
           </div>
-        </div>
-        <div class="noneData" v-if="dataList.length === 0">
-          暂无数据
+          <div class="versionTable">
+            <div class="tableHeader">
+              <div class="tableCell index">序号</div>
+              <div class="tableCell appName">应用名称</div>
+              <div class="tableCell updateInfo">更新内容</div>
+              <div class="tableCell curVersion">版本号</div>
+              <div class="tableCell publishTime">发布时间</div>
+              <div class="tableCell handle">操作</div>
+            </div>
+            <div class="tableRow" v-for="(item, index) in dataList" :key="index">
+              <div class="tableCell index">
+                <div>{{index+1}}</div>
+              </div>
+              <div class="tableCell appName">
+                <div>{{item.appName }}</div>
+              </div>
+              <div class="tableCell updateInfo">
+                <div>{{item.content}}</div>
+              </div>
+              <div class="tableCell curVersion">
+                <div>{{item.versionCode}}</div>
+              </div>
+              <div class="tableCell publishTime">
+                <div>{{item.createTime}}</div>
+              </div>
+              <div class="tableCell handle">
+                <el-button type="primary" class="major" v-if="version_edit"
+                           @click.prevent.stop="openVersionInfo(item.appId, item)">编辑
+                </el-button>
+                <el-button type="primary" class="major" v-if="version_delete" @click.prevent.stop="deleteVersion(item.appId)">
+                  删除
+                </el-button>
+                <span v-if="!version_edit && !version_delete">暂无权限编辑</span>
+              </div>
+            </div>
+          </div>
+          <div class="noneData" v-if="dataList.length === 0">
+            暂无数据
+          </div>
         </div>
       </div>
       <div class="pagination">
