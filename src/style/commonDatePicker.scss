@@ -1,0 +1,72 @@
+.commonDatePicker {
+  line-height: 30px;
+  height: 60px;
+
+  i {
+    font-size: 16px;
+  }
+
+  .datepicker {
+    margin-left: 10px;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  input{
+    &::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+      /* WebKit browsers */
+      color: #BABABA;
+    }
+
+    &:-moz-placeholder, textarea:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: #BABABA;
+    }
+
+    &::-moz-placeholder, textarea::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: #BABABA;
+    }
+
+    &:-ms-input-placeholder, textarea:-ms-input-placeholder {
+      /* Internet Explorer 10+ */
+      color: #BABABA;
+    }
+  }
+
+  .el-input__inner {
+    height: 30px;
+    line-height: 30px;
+    text-indent: 8px;
+    padding: 0 0 !important;
+    margin: 0 0 ;
+    border-radius: 4px;
+  }
+
+  .el-icon-date{
+    display: none;
+  }
+  .el-input__icon{
+    &::before{
+      display: none !important;
+    }
+  }
+
+  .openIcon, .closeIcon{
+    &::before{
+      display: block;
+      content: '';
+      position: absolute;
+      right:12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 14px;
+      background: url("../../assets/btn_time.png") no-repeat center center;
+      background-size: cover;
+    }
+  }
+
+}

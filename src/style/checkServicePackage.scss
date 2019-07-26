@@ -1,0 +1,87 @@
+.checkServicePackage {
+  width: 1354px;
+  padding: 0 60px;
+  padding-bottom: 98px;
+  padding-top: 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+
+  .freeServiceTitle {
+    text-align: left;
+    line-height: 74px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .serviceTable {
+    display: table;
+    border-top: 1px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
+    background-color: #ffffff;
+
+    .serviceTableCell {
+      font-size: 16px;
+      text-align: center;
+      vertical-align: middle;
+      display: table-cell;
+      border-right: 1px solid #DDDDDD;
+      border-collapse: collapse;
+
+      &.borderBottom {
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      > div {
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid #DDDDDD;
+        box-sizing: border-box;
+      }
+
+    }
+
+    .serviceThead {
+      display: table-header-group;
+      background-color: #F3F3F3;
+
+      .serviceTableCell {
+        height: 38px;
+        line-height: 38px;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      .index {
+        width: 60px;
+      }
+
+      .categories {
+        width: 90px;
+      }
+
+      .serviceInfo {
+        width: 207px;
+      }
+
+      .serviceTimes {
+        width: 90px;
+      }
+
+      .serviceExplain {
+        width: 690px;
+      }
+
+      .serviceRemark {
+        width: 90px;
+      }
+    }
+
+    .serviceColumn {
+      display: table-row;
+
+      .col2 {
+        height: 100px;
+        line-height: 100px;
+      }
+    }
+  }
+}

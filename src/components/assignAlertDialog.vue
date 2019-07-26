@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import commonDialog from './commonDialog';
+  import commonDialog from './common/commonDialog';
 
   export default {
     name: "assignAlertDialog",
@@ -77,58 +77,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .assignAlertDialog {
-    min-width: 362px;
-    /*min-height: 186px;*/
-    border-radius: 4px;
-    .assignDialogTitle {
-      width: 100%;
-      color: #ffffff;
-      line-height: 40px;
-      text-align: center;
-      background-color: #4486FF;
-      position: relative;
-      font-size: 18px;
-
-      .closeIcon {
-        font-size: 24px;
-        cursor: pointer;
-        color: #ffffff;
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-    .assignDialogContent{
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-    }
-    .assignDialogFooter{
-      margin: 0 auto;
-      padding-bottom: 24px;
-      &.alignCenter{
-        text-align: center;
-      }
-      &.alignLeft{
-        text-align: left;
-      }
-      .el-button{
-        margin: 0 10px;
-        padding: 0 0;
-        width: 86px;
-        height: 30px;
-        font-size: 16px;
-      }
-      .major{
-        background-color: #4486ff;
-        border:none;
-      }
-      .info{
-        background-color: #bbbbbb;
-        border:none;
-      }
-    }
-  }
+@import "../style/assignAlertDialog.scss";
 </style>

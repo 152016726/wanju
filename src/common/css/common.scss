@@ -101,6 +101,7 @@ body {
   color: #3F4457;
   background-color: #fff;
   width: 100%;
+  min-width: 1024Px;
   height: 100vh;
 }
 
@@ -198,7 +199,6 @@ em {
 /* 外部盒子主样式 */
 #app {
   width: 100%;
-  min-width: 1024Px;
   left: 0;
   right: 0;
   margin: 0;

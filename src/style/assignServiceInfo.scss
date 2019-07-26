@@ -1,0 +1,100 @@
+.assignServiceInfo {
+  width: 1354px;
+  border-radius: 4px;
+
+  .assignDialogTitle {
+    width: 100%;
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 40px;
+    text-align: center;
+    background-color: #4486FF;
+    position: relative;
+
+    .closeIcon {
+      font-size: 24px;
+      cursor: pointer;
+      color: #ffffff;
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .assignServiceContent {
+    background-color: #ffffff;
+    padding: 30px 60px;
+
+    .contentTitle {
+      /*line-height: 44px;*/
+      font-size: 16px;
+      border-bottom: 1px solid #DDDDDD;
+      text-align: left;
+    }
+
+    .servicePackages {
+      .assignSignerTitle {
+        text-align: left;
+        font-weight: bold;
+        font-size: 18px;
+        padding-top: 28px;
+        padding-bottom: 20px;
+        border:none;
+        text-indent: 0;
+      }
+
+      .serviceTable {
+        border: 1px solid #DDDDDD;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        border-collapse: collapse;
+
+        .serviceTableCell {
+          font-size: 16px;
+          text-align: center;
+          vertical-align: middle;
+          border: 1px solid #DDDDDD;
+          padding: 4px 4px;
+          box-sizing: border-box;
+          border-collapse: collapse;
+          line-height: 30px;
+        }
+
+        .serviceThead {
+          background-color: #F3F3F3;
+
+          .serviceTableCell {
+            line-height: 38px;
+            border-bottom: 1px solid #DDDDDD;
+          }
+
+          .index {
+            width: 60px;
+          }
+
+          .categories {
+            width: 297px;
+          }
+
+          .serviceTimes {
+            width: 90px;
+          }
+
+          .serviceExplain {
+            width: 690px;
+          }
+
+          .serviceRemark {
+            width: 90px;
+          }
+        }
+
+        .serviceColumn {
+          border-collapse: collapse;
+        }
+      }
+    }
+
+  }
+}

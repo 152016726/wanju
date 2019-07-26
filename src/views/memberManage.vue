@@ -71,8 +71,8 @@
 </template>
 
 <script>
-  import commonTextInput from '@/components/commonTextInput';
-  import commonSelector from '@/components/commonSelector';
+  import commonTextInput from '@/components/common/commonTextInput';
+  import commonSelector from '@/components/common/commonSelector';
   import editRoleMember from '@/components/editRoleMember';                        // 编辑角色
 
   let SEARCH_OBJ = {};                                                   // 搜查对象

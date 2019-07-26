@@ -51,7 +51,12 @@
 
       <!-- 新建家庭档案信息开始 -->
       <div class="createHomeFile" v-if="activeIndex === 1">
-        <p class="fileName">基本资料</p>
+        <div class="homeFileHeader">
+          <p class="fileName">基本资料</p>
+          <!--<el-button type="primary" class="major" v-if="!isDisabledFamily" @click.prevent.stop="changeEditState">{{isEditHomeFile ?-->
+          <!--'编辑' : '保存'}}-->
+          <!--</el-button>-->
+        </div>
         <div class="baseInfo">
           <commonTextInput v-model="JDJGMC" :text="'建档单位'" :isDisabled="isDisabledFamily || isHandleFamily"></commonTextInput>
           <commonTextInput v-model="GDJGMC" :text="'存档单位'" :isDisabled="isDisabledFamily || isHandleFamily"></commonTextInput>
@@ -191,14 +196,14 @@
 
 <script>
   import assignBaseInfo from './assignBaseInfo';                                  // 基本资料
-  import commonTextInput from './commonTextInput';                                // 公共输入组件
-  import commonAreaSelector from './commonAreaSelector';                          // 公共地址组件
+  import commonTextInput from './common/commonTextInput';                                // 公共输入组件
+  import commonAreaSelector from './common/commonAreaSelector';                          // 公共地址组件
   import assignMember from './assignMember';                                      // 家庭成员
   import assignSigner from './assignSigner';                                      // 签约人
   import assignSignerInfo from './assignSignerInfo';                              // 签约信息
-  import commonToggle from './commonToggle';                                      // 开关通用组件
+  import commonToggle from './common/commonToggle';                                      // 开关通用组件
   import assignAlertDialog from './assignAlertDialog';                            // 通过/拒绝弹窗组件
-  import commonSelector from './commonSelector';                                  // 公共选择器
+  import commonSelector from './common/commonSelector';                                  // 公共选择器
 
   const APPROVAL_LIST = [0, 1, 2];                                          // 可以展示审批的字段
 
@@ -214,11 +219,14 @@
         signStatus: 0,                                                            // 签约信息状态
         isDisabledSign: false,                                                    // 是否可编辑签约信息    true代表不可编辑，false代表可编辑
         activeIndex: 0,                                                           // 显示哪个档案信息
+        isEditHomeFile: false,                                                    // 是否编辑/保存家庭档案信息
         fileList: ['新建健康档案信息', '新建家庭档案信息', '签约成员信息'],       // 3个档案信息
         JDJGMC: '',                                                               // 建档单位
         GDJGMC: '',                                                               // 存档单位
         JDRMC: '',                                                                // 建档人
         ZRYSMC: '',                                                               // 责任医生
+        JKDAID: '',                                                               // 户主健康档案ID
+        XM: '',                                                                   // 户主姓名
         isShowReject: false,                                                      // 是否展示拒绝弹窗
         rejectList: [{                                                            // 拒绝理由的List
           value: 1,
@@ -283,6 +291,24 @@
       this.initData();
     },
     methods: {
+      /**
+       * 编辑/保存家庭档案信息
+       */
+      changeEditState(){
+        const {JTID, XM, JKDAID} = this;
+        this.isEditHomeFile = !this.isEditHomeFile;
+        if(this.isEditHomeFile){
+          this.$post('family/sign/order/updateSignFamily',{JTID, XM, JKDAID, }).then(rsp=>{
+
+          }, rej=>{
+            if(rej.data.errcode === 460){
+              this.$message.error(rej.data.datas[0].message);
+            }else{
+              this.$message.error(rej.data.errmsg);
+            }}
+          )
+        }
+      },
       /**
        * 设定signStatus
        * @param val type:number
@@ -440,13 +466,18 @@
           this.isShowHomeFile = !this.isShowHomeFile;
         }
       },
+      /**
+       * 初始化数据
+       */
       initData(){
         const {JTID, ORDERSTATUS, QYID} = this;
         this.$post('family/sign/order/getOrderDetails', {
           JTID, QYID
         }).then(rsp => {
           this.familyInfo = rsp.data;
-          const {JDJGMC, GDJGMC, JDRMC, ZRYSMC, PROVINCEDID, CITYID, DISTRICTID, STREETID, COMMITTEEID, XXDZ, FAMILYRECORDAUDITED, MEMBERRECORDAUDITED, PROVINCEDNAME, CITYNAME, DISTRICTNAME, STREETNAME, COMMITTEENAME} = rsp.data;
+          const {JDJGMC, GDJGMC, JDRMC, ZRYSMC, PROVINCEDID, CITYID, DISTRICTID, STREETID,
+            COMMITTEEID, XXDZ, FAMILYRECORDAUDITED, MEMBERRECORDAUDITED, PROVINCEDNAME, CITYNAME, DISTRICTNAME, STREETNAME,
+            COMMITTEENAME, JKDAID, XM} = rsp.data;
           this.JDJGMC = JDJGMC;
           this.GDJGMC = GDJGMC;
           this.JDRMC = JDRMC;
@@ -464,6 +495,8 @@
           this.XXDZ = XXDZ;
           this.healthStatus = MEMBERRECORDAUDITED;
           this.familyStatus = FAMILYRECORDAUDITED;
+          this.JKDAID = JKDAID;
+          this.XM = XM;
           if(MEMBERRECORDAUDITED === 0){
             this.activeIndex = 0;
           }else if(FAMILYRECORDAUDITED === 0){
@@ -485,177 +518,5 @@
 </script>
 
 <style lang="scss">
-  @media screen and (max-width: 1300px){
-    .createHomeFile{
-      .baseInfo{
-        .commonTextInput .commonTextInputContent .inputType{
-          width: 175px;
-        }
-      }
-      .commonAreaSelector .address{
-        .commonTextInput .commonTextInputContent .inputType{
-          width: 210px;
-        }
-      }
-     .commonAreaSelector .areaSelectorTitle{
-        width: 90px;
-       text-align: right;
-      }
-    }
-  }
-  $border: 1px solid #DDDDDD;
-  .assignDialog {
-    width: 1354px;
-    border-radius: 4px;
-
-    .established {
-      color: #4486FF;
-      line-height: 30px;
-    }
-
-    .refused {
-      color: #F65860;
-      line-height: 30px;
-    }
-
-    .assignDialogTitle {
-      width: 100%;
-      font-size: 18px;
-      color: #ffffff;
-      line-height: 40px;
-      text-align: center;
-      background-color: #4486FF;
-      position: relative;
-
-      .closeIcon {
-        font-size: 24px;
-        cursor: pointer;
-        color: #ffffff;
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-
-    .assignDialogContent {
-      background-color: #ffffff;
-      padding: 15px 60px;
-
-      .contentTitle {
-        line-height: 44px;
-        font-size: 16px;
-        border-bottom: $border;
-        text-align: left;
-      }
-
-      .fileList {
-        border-bottom: $border;
-
-        .file {
-          padding: 17px 25px;
-          font-size: 16px;
-          font-weight: bold;
-
-          &.active {
-            color: #4486FF;
-            border-bottom: 1px solid #4486FF;
-          }
-        }
-      }
-
-      .fileName {
-        padding-top: 28px;
-        padding-bottom: 20px;
-        text-align: left;
-        font-weight: bold;
-        font-size: 18px;
-      }
-
-      .createNewFile {
-        .btns {
-          padding-top: 10px;
-          text-align: left;
-
-          .major {
-            margin-right: 20px !important;
-            background-color: #4486ff;
-          }
-          .refuse{
-            background-color: #f65860;
-          }
-
-          .el-button {
-            padding: 0 0;
-            margin: 0 0;
-            width: 86px;
-            height: 30px;
-            line-height: 30px;
-          }
-        }
-      }
-
-      .assignBaseInfo {
-        border-top: 1px solid #DDDDDD;
-      }
-
-      .createHomeFile {
-        .fileName {
-          &.memberTitle {
-            padding-top: 0;
-          }
-        }
-        .baseInfo {
-          display: flex;
-
-          > div {
-            margin-right: 40px;
-
-            /*&:nth-child(2) {*/
-              /*margin-right: 50px;*/
-            /*}*/
-
-            &:nth-last-child(1) {
-              margin-right: 0;
-            }
-          }
-        }
-
-        .members {
-          display: flex;
-          flex-wrap: wrap;
-
-          > div {
-            margin-right: 40px;
-            margin-bottom: 30px;
-
-            &:nth-child(4n) {
-              margin-right: 0;
-            }
-          }
-        }
-
-        .btns {
-          text-align: left;
-
-          .el-button {
-            width: 86px;
-            height: 30px;
-            line-height: 30px;
-            font-size: 16px;
-            margin: 0 0;
-            padding: 0 0;
-          }
-
-          .major {
-            margin-right: 20px;
-            background-color: #4486ff;
-          }
-          .refuse{
-            background-color: #f65860;
-          }
-        }
-      }
-    }
-  }
+@import '../style/assignDialog.scss';
 </style>

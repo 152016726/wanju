@@ -78,55 +78,5 @@
 </script>
 
 <style lang="scss">
-  .commonInput {
-    width: 100%;
-    height: 40px;
-    padding: 10px 0;
-    font-size: 16px;
-    box-sizing: border-box;
-    border: 1px solid #DDDDDD;
-    border-radius: 4px;
-    &.active{
-      border: 1px solid #4486FF;
-    }
-    .icon {
-      width: 11.67%;
-      padding: 0 10px;
-      height: 100%;
-      box-sizing: border-box;
-
-      .tag {
-        height: 100%;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
-      }
-    }
-
-    .inputType {
-      width: 88.33%;
-      height: 100%;
-      line-height: 20px;
-      font-size: 16px;
-      color: #3F4457;
-      -webkit-box-shadow: 0 0 0px 1000px white inset;
-      background-color: #ffffff!important;
-      input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-        /* WebKit browsers */
-        color: #BABABA;
-      }
-      input:-moz-placeholder, textarea:-moz-placeholder {
-        /* Mozilla Firefox 4 to 18 */
-        color: #BABABA;
-      }
-      input::-moz-placeholder, textarea::-moz-placeholder {
-        /* Mozilla Firefox 19+ */
-        color: #BABABA;
-      }
-      input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-        /* Internet Explorer 10+ */
-        color: #BABABA;
-      }
-    }
-  }
+@import "../../style/commonInput.scss";
 </style>

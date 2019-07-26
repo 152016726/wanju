@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import commonTextInput from './commonTextInput';
-  import commonDatePicker from './commonDatePicker';
+  import commonTextInput from './common/commonTextInput';
+  import commonDatePicker from './common/commonDatePicker';
 
   export default {
     name: "assignPersonInfo",
@@ -42,28 +42,5 @@
 </script>
 
 <style lang="scss">
-.assignPersonInfo{
-  .assignPersonInfoTitle{
-    padding: 8px 0;
-    text-align: left;
-    font-weight: bold;
-    font-size: 18px;
-  }
-  .illnessHistory{
-    .iconText{
-      width: 65px;
-    }
-  }
-  .assignPersonInfoSubTitle{
-    text-indent: 17px;
-    text-align: left;
-    padding-bottom: 20px;
-  }
-  .illnessInfo{
-    display: flex;
-    >div{
-      margin-right: 46px;
-    }
-  }
-}
+@import "../style/assignPersonInfo.scss";
 </style>

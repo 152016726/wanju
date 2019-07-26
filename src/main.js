@@ -39,19 +39,18 @@ router.beforeEach((to, from, next) => {
   }else{
     store.dispatch('setIsLoginState', false)
   }
-  // if (to.name !== 'login' && !sessionStorage.getItem('auth-token')) {
-  //   // Message({
-  //   //   message: '请先登录！',
-  //   //   type: 'error',
-  //   //   duration: 3 * 1000,
-  //   //   center: true
-  //   // });
-  //   // 跳转到登录页面
-  //   router.push({name: 'login'});
-  // }else{
-  //   next()
-  // }
-  next()
+  if (to.name !== 'login' && !sessionStorage.getItem('auth-token')) {
+    // Message({
+    //   message: '请先登录！',
+    //   type: 'error',
+    //   duration: 3 * 1000,
+    //   center: true
+    // });
+    // 跳转到登录页面
+    router.push({name: 'login'});
+  }else{
+    next()
+  }
 });
 
 /* eslint-disable no-new */

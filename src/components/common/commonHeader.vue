@@ -71,7 +71,7 @@
 
 <script>
   import assignAlertDialog from '@/components/assignAlertDialog';
-  import commonTextInput from '@/components/commonTextInput';
+  import commonTextInput from '@/components/common/commonTextInput';
 
   export default {
     name: "commonHeader",
@@ -176,59 +176,5 @@
 </script>
 
 <style lang="scss">
-  .header {
-    background-color: #4486FF;
-    line-height: 60px;
-    padding: 0 20px;
-    width: 100%;
-    box-sizing: border-box;
-    .left {
-      /*.logo{*/
-      /*width: 25px;*/
-      /*height: 25px;*/
-      /*background-color: skyblue;*/
-      /*border-radius: 50%;*/
-      /*}*/
-      .companyName {
-        font-weight: bold;
-        font-size: 25px;
-        color: #ffffff;
-      }
-    }
-
-    .right {
-      font-size: 14px;
-
-      .el-dropdown {
-        color: #ffffff;
-      }
-
-      .avatar {
-        margin-left: 20px;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        border: 1px solid #ffffff;
-        display: inline-block;
-        vertical-align: middle;
-        background-size: contain;
-      }
-
-      .icon {
-        display: inline-block;
-      }
-    }
-
-    .changePwd {
-      cursor: pointer;
-    }
-
-    .resetPwd {
-      padding: 40px 90px 0 60px;
-
-      .iconText {
-        width: 70px;
-      }
-    }
-  }
+@import "../../style/commonHeader.scss";
 </style>

@@ -41,7 +41,7 @@
           <div class="choosed">
             <el-checkbox v-model="checked">记住密码</el-checkbox>
           </div>
-          <a href="#" class="loginBtn" :class="{active: account && password && imgCode}" @click.prevent.stop="submitData">
+          <a href="#" class="loginBtn" :class="{active: account && password && imgCode}" @click.prevent="submitData">
             登陆系统
           </a>
         </div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-  import commonInput from '@/components/commonInput';
+  import commonInput from '@/components/common/commonInput';
   import accountOff from '@/assets/accountOff.png';
   import accountOn from '@/assets/accountOn.png';
   import lock from '@/assets/ic_lock_off.png';

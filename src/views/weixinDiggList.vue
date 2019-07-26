@@ -79,9 +79,9 @@
 </template>
 
 <script>
-  import commonTextInput from '@/components/commonTextInput';
+  import commonTextInput from '@/components/common/commonTextInput';
   import editWeixinDiggList from '@/components/editWeixinDiggList';
-  import commonSelector from '@/components/commonSelector';
+  import commonSelector from '@/components/common/commonSelector';
 
   export default {
     name: "weixinDiggList",

@@ -145,10 +145,10 @@
   import * as FileSaver from 'file-saver';
   import Excel from 'exceljs';
   import $ from 'jquery';
-  import commonSelector from '@/components/commonSelector';               // 公共选择器
-  import commonTextInput from '@/components/commonTextInput';             // 公共输入框
-  import commonDatePicker from '@/components/commonDatePicker';           // 公共日期选择
-  import commonDialog from '@/components/commonDialog';                   // 公共弹窗
+  import commonSelector from '@/components/common/commonSelector';               // 公共选择器
+  import commonTextInput from '@/components/common/commonTextInput';             // 公共输入框
+  import commonDatePicker from '@/components/common/commonDatePicker';           // 公共日期选择
+  import commonDialog from '@/components/common/commonDialog';                   // 公共弹窗
   import assignDialog from '@/components/assignDialog';                  // 签约详情弹窗
   import iconImg from '@/assets/btn_see.png';
   import util from '@/common/js/util';

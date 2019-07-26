@@ -1,0 +1,151 @@
+@media screen and (max-width: 1300px){
+  .editRoleMember .editRoleLeft{
+    .iconText{
+      width: 90px;
+    }
+  }
+  .editRoleMember .description .teamIntro{
+    .intro{
+      width: 90px!important;
+    }
+  }
+}
+.editRoleMember {
+  padding: 0 60px;
+  padding-top: 40px;
+  width: 960px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+
+  .iconText {
+    width: 70px;
+  }
+
+  .assignDialogFooter {
+    margin-left: 70px;
+    text-align: left;
+  }
+
+  .baseInfo {
+    display: flex;
+    justify-content: space-between;
+
+    .editRoleLeft {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .commonTextInput {
+      margin-right: 55px;
+    }
+
+    .editRoleRight {
+      .avatar-uploader .el-upload {
+        border: 1px solid #DDDDDD;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
+        text-align: center;
+      }
+
+      .avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .description {
+    .teamIntro {
+      margin-bottom: 30px;
+      width: 840px;
+
+      .intro {
+        width: 75px;
+        margin-right: 10px;
+        text-align: center;
+        vertical-align: middle;
+
+        &.center {
+          margin-top: 72px;
+        }
+      }
+
+      .el-textarea__inner, .textArea {
+        width: 740px;
+        height: 160px;
+
+        .el-input__count {
+          color: #F65860;
+        }
+      }
+
+      .teamMember {
+        display: flex;
+        flex-wrap: wrap;
+
+        > div {
+          margin-right: 42px;
+
+          &:nth-child(4n) {
+            margin-right: 0;
+          }
+        }
+
+        .member {
+          width: 160px;
+          height: 160px;
+          border: 1px solid #DDDDDD;
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          line-height: 23px;
+          font-size: 16px;
+          position: relative;
+
+          .icon {
+            cursor: pointer;
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: url("../assets/btn_delete.png") no-repeat center center;
+            background-size: cover;
+            vertical-align: middle;
+            text-align: center;
+            color: #ffffff;
+            font-size: 28px;
+          }
+
+          .avatar {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 6px;
+          }
+        }
+
+        .addTeamMember {
+          cursor: pointer;
+          width: 160px;
+          height: 160px;
+          background: url("../assets/btn_add_big.png") no-repeat center center;
+          background-size: cover;
+        }
+      }
+    }
+  }
+}

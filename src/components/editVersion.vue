@@ -43,8 +43,8 @@
 </template>
 
 <script>
-  import commonTextInput from './commonTextInput';
-  import commonSelector from './commonSelector';
+  import commonTextInput from './common/commonTextInput';
+  import commonSelector from './common/commonSelector';
   import timer from '@/common/js/timer';
 
   const timerOps = {          // 计时器参数
@@ -161,133 +161,5 @@
 </script>
 
 <style lang="scss">
-  .editVersion{
-    padding: 20px 83px;
-    .iconText{
-      width: 135px;
-      text-align: right;
-    }
-    .updateIntro {
-      margin-bottom: 30px;
-      width: 840px;
-
-      .intro {
-        width: 135px;
-        margin-right: 10px;
-        text-align: right;
-        vertical-align: middle;
-
-        &.center {
-          margin-top: 72px;
-        }
-      }
-
-      .el-textarea__inner, .textArea {
-        width: 695px;
-        height: 160px;
-
-        .el-input__count {
-          color: #F65860;
-        }
-      }
-
-      .teamMember {
-        display: flex;
-        flex-wrap: wrap;
-
-        > div {
-          margin-right: 42px;
-
-          &:nth-child(4n) {
-            margin-right: 0;
-          }
-        }
-
-        .member {
-          width: 160px;
-          height: 160px;
-          border: 1px solid #DDDDDD;
-          border-radius: 10px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          line-height: 23px;
-          font-size: 16px;
-          position: relative;
-
-          .icon {
-            cursor: pointer;
-            position: absolute;
-            top: -14px;
-            right: -14px;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: url("../assets/btn_delete.png") no-repeat center center;
-            background-size: cover;
-            vertical-align: middle;
-            text-align: center;
-            color: #ffffff;
-            font-size: 28px;
-          }
-
-          .avatar {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 6px;
-          }
-        }
-
-        .addTeamMember {
-          cursor: pointer;
-          width: 160px;
-          height: 160px;
-          background: url("../assets/btn_add_big.png") no-repeat center center;
-          background-size: cover;
-        }
-      }
-    }
-    .fileUploader {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-
-      .iconText {
-        margin-right: 10px;
-      }
-      .lineProgress{
-        display: flex;
-        align-items: center;
-        width: 300px;
-        /*height: 20px;*/
-        margin-left: 20px;
-      }
-    }
-    .uploadBtn {
-      cursor: pointer;
-      border-radius: 6px;
-      padding: 0 10px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      color: #BABABA;
-      border: 1px solid #DDDDDD;
-      box-sizing: border-box;
-      display: block;
-    }
-    .txtLoad {
-      margin: 0 0 20px 130px;
-      padding: 0 0;
-      border: none;
-      height: 20px;
-      line-height: 20px;
-      text-indent: 20px;
-      text-align: left;
-      background: url("../assets/ic_txt.png") no-repeat center left;
-      background-size: contain;
-    }
-  }
-
-
+@import "../style/editVersion.scss";
 </style>

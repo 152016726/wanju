@@ -48,7 +48,6 @@
   import sign from '@/assets/ic_signing.png';
   import account from '@/assets/ic_account.png';
   import team from '@/assets/ic_team.png';
-  import service from '@/assets/ic_service.png';
   import weixinDigg from '@/assets/ic_public.png';
   import settings from '@/assets/ic_system.png';
 
@@ -58,18 +57,40 @@
       return {
         asideList: [
           // {name: '首页', iconSrc:home, url: './', flag:true, iconSrc: home},
-          {name: '签约管理', iconSrc: sign, url: '/', flag:true, items: [{name: '签约列表', flag:true, url: '/'}]},
-          {name: '账号管理', iconSrc: account,url: '/roleManage', flag:true, items: [{name: '角色列表', flag:true, url: '/roleManage'},{name: '账号列表', flag:true, url: '/accountManage'}]},
-          {name: '团队管理', iconSrc: team,url: '/memberManage', flag:true, items: [{name: '医生列表', flag:true, url: '/memberManage'}, {name: '团队列表', flag:true, url: '/teamManage'}]},
-          // {name: '服务包管理', iconSrc: service, url: '/servicePackage', flag:true, items: [{name: '服务包管理', flag:true, url: '/servicePackage'}]},
+          {
+            name: '签约管理', iconSrc: sign, url: '/', flag: true,
+            items: [
+              {name: '签约列表', flag: true, url: '/'}
+            ]
+          },
+          {
+            name: '账号管理', iconSrc: account, url: '/roleManage', flag: true,
+            items: [
+              {name: '角色列表', flag: true, url: '/roleManage'},
+              {name: '账号列表', flag: true, url: '/accountManage'}
+            ]
+          },
+          {
+            name: '团队管理',
+            iconSrc: team,
+            url: '/memberManage',
+            flag: true,
+            items: [{name: '医生列表', flag: true, url: '/memberManage'}, {name: '团队列表', flag: true, url: '/teamManage'}]
+          },
           // {name: '公众号管理', iconSrc: weixinDigg, url: '/weixinDiggList', flag:true, items: [{name: '公众号列表', flag:true, url: '/weixinDiggList'}, {name: '公众号资讯', flag:true, url: '/weixinDiggInfo'}]},
-          {name: '系统设置', iconSrc: settings, url: '/version', flag:true,items: [{name: '版本管理', flag: true, url: '/version'}]}
+          {
+            name: '系统设置',
+            iconSrc: settings,
+            url: '/version',
+            flag: true,
+            items: [{name: '版本管理', flag: true, url: '/version'}]
+          }
         ]
       }
     },
-    watch:{
-      statusSet(val){
-        if(val){
+    watch: {
+      statusSet(val) {
+        if (val) {
           this.initData()
         }
       }
@@ -78,7 +99,7 @@
       ...mapState([
         'orderPage'
       ]),
-      statusSet(){
+      statusSet() {
         return this.$store.state.isLogin
       }
     },
@@ -92,14 +113,9 @@
           path: url
         })
       },
-      initData(){
+      initData() {
         let authObj = JSON.parse(this.$localStore.getItem('authority'));
-        if(!!authObj){
-          // this.asideList[0].flag = authObj['index'];
-          // this.asideList[1].flag = authObj['sign_list'];
-          // this.asideList[2].flag = authObj['role_list'] || authObj['account_list'];
-          // this.asideList[3].flag = authObj['team_member_list'] || authObj['team_list'];
-          // this.asideList[4].flag = authObj['wx_secret_list'] || authObj['wx_news_list'];
+        if (!!authObj) {
           let arr = this.asideList;
           // 签约列表
           arr[0].flag = authObj['sign_list'];
@@ -134,43 +150,52 @@
     display: flex;
     height: 100%;
     box-sizing: border-box;
-    .el-menu{
+
+    .el-menu {
       width: 100%;
       padding: 10px 10px;
       border: none;
-      .el-submenu{
+
+      .el-submenu {
         line-height: 40px;
         margin-bottom: 10px;
       }
-      .tabTitle{
+
+      .tabTitle {
         cursor: pointer;
       }
-      .el-menu-item{
+
+      .el-menu-item {
         padding: 0 10px !important;
         font-size: 18px !important;
         height: 40px;
         line-height: 40px;
         margin-bottom: 10px;
-        span{
+
+        span {
           margin-left: 10px;
         }
       }
-      .el-menu-item-group{
-        .el-menu-item{
+
+      .el-menu-item-group {
+        .el-menu-item {
           font-size: 18px;
           margin: 0 10px;
           margin-top: 10px;
           text-align: center;
         }
       }
-      .is-active{
-        background-color: #4486FF!important;
-        color: #ffffff!important;
+
+      .is-active {
+        background-color: #4486FF !important;
+        color: #ffffff !important;
       }
-      .el-menu-item:hover{
-        background-color: #4486FF!important;
+
+      .el-menu-item:hover {
+        background-color: #4486FF !important;
       }
     }
+
     .tag {
       width: 20px;
       height: 20px;

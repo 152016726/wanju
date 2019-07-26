@@ -1,0 +1,52 @@
+.commonAutocomplete {
+  line-height: 30px;
+  height: 60px;
+
+  i {
+    font-size: 16px;
+  }
+
+  .selection, input {
+    margin-left: 10px;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  input {
+    border: 1px solid #DDDDDD;
+    text-indent: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    &::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+      /* WebKit browsers */
+      color: #BABABA;
+    }
+
+    &:-moz-placeholder, textarea:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: #BABABA;
+    }
+
+    &::-moz-placeholder, textarea::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: #BABABA;
+    }
+
+    &:-ms-input-placeholder, textarea:-ms-input-placeholder {
+      /* Internet Explorer 10+ */
+      color: #BABABA;
+    }
+  }
+
+  .el-input__inner {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 0;
+    margin: 0 0;
+  }
+
+  .el-input__icon {
+    line-height: 30px;
+  }
+}

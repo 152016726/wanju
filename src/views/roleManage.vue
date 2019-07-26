@@ -94,7 +94,7 @@
 
 <script>
   import assignAlertDialog from '@/components/assignAlertDialog';                  // 通过/拒绝弹窗组件
-  import commonDialog from '@/components/commonDialog';
+  import commonDialog from '@/components/common/commonDialog';
   import addNewRole from '@/components/addNewRole';
 
   export default {

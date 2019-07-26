@@ -1,0 +1,180 @@
+@media screen and (max-width: 1300px){
+  // 基本资料
+  .assignBaseInfo .assignBaseInfoInput .item {
+    .commonTextInput, .commonDatePicker, .commonSelector{
+      .iconText{
+        width: 107px;
+      }
+      .inputType, .datepicker, .selection{
+        width: 170px;
+      }
+    }
+    &.col-3{
+      .iconText{
+        width: 120px;
+      }
+    }
+    &.col-4{
+      .iconText{
+        width: 135px;
+      }
+    }
+  }
+  // 地址
+  .assignBaseInfo .contentAddress .commonAreaSelector{
+    .address{
+      .commonTextInput .commonTextInputContent .inputType{
+        width: 200px;
+      }
+    }
+    .areaSelectorTitle{
+      width: 107px!important;
+    }
+  }
+  // 个人病史
+  .assignBaseInfo .assignPersonInfo, .assignBaseInfo .assignHomeInfo{
+    .iconText{
+      min-width: 88px!important;
+    }
+  }
+  .assignBaseInfo .assignHomeInfo .assignHomeContent .commonTextInput:nth-child(4n){
+    margin-right: 30px !important;
+  }
+}
+.assignBaseInfo {
+  &.borderBottom {
+    border-bottom: 1px solid #DDDDDD;
+  }
+
+  .assignBaseHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 15px;
+    padding-bottom: 19px;
+
+    .major {
+      width: 80px;
+      height: 30px;
+      padding: 0 0;
+      margin: 0 0;
+
+      span {
+        line-height: 30px;
+      }
+    }
+
+    .assignBaseInfoTitle {
+      text-align: left;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+
+
+  .assignBaseInfoInput {
+    .col-1 {
+      margin-right: 15px;
+
+      .iconText {
+        width: 75px;
+      }
+    }
+
+    .col-2 {
+      margin-right: 15px;
+
+      .iconText {
+        width: 75px;
+      }
+    }
+
+    .col-3 {
+      margin-right: 14px;
+
+      .iconText {
+        width: 90px;
+      }
+    }
+
+    .col-4 {
+      .iconText {
+        width: 107px;
+      }
+    }
+  }
+
+  .contentAddress{
+    .commonAreaSelector .areaSelectorTitle{
+      width: 75px;
+      text-align: right;
+    }
+  }
+
+  .assignPersonInfo {
+    .assignPersonInfoTitle {
+      padding: 8px 0;
+      text-align: left;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .illnessHistory {
+      display: flex;
+
+      .commonTextInput {
+        margin-right: 46px;
+      }
+
+      .iconText {
+        width: 65px;
+      }
+    }
+
+    .assignPersonInfoSubTitle {
+      text-indent: 17px;
+      text-align: left;
+      padding-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .illnessInfo {
+      display: flex;
+
+      .iconText {
+        width: 65px;
+      }
+
+      > div {
+        margin-right: 46px;
+      }
+    }
+  }
+
+  .assignHomeInfo {
+    .assignHomeInfoTitle {
+      padding: 8px 0;
+      text-align: left;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .assignHomeContent {
+      display: flex;
+      flex-wrap: wrap;
+
+      .commonTextInput {
+        margin-right: 30px;
+
+        &:nth-child(2) {
+          margin-right: 10px;
+        }
+
+        &:nth-child(4n) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+}

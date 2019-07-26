@@ -32,7 +32,7 @@
 
 <script>
   // 公共头部组件
-  import commonHeader from './components/commonHeader';
+  import commonHeader from './components/common/commonHeader';
   // 公共侧边栏
   import asside from './components/asside';
   import {mapState} from 'vuex'
@@ -55,11 +55,11 @@
   @import "./common/css/common.scss";
   @import "./common/css/media.css";
   #app {
+    min-height: 100vh!important;
     .homePage{
-      min-height: 100vh;
+      height: 100%;
     }
     .el-container {
-      min-height: 100%;
       .el-header{
         padding: 0 0 !important;
       }

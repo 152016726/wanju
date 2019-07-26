@@ -30,7 +30,7 @@
 
 <script>
   // 公共头部组件
-  import commonHeader from '../components/commonHeader';
+  import commonHeader from '../components/common/commonHeader';
   // 公共侧边栏
   import asside from '../components/asside'
 

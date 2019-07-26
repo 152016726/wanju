@@ -111,10 +111,10 @@
 
 <script>
   import addNewAccount from '@/components/addNewAccount';
-  import commonDialog from '@/components/commonDialog';
+  import commonDialog from '@/components/common/commonDialog';
   import assignAlertDialog from '@/components/assignAlertDialog';                  // 通过/拒绝弹窗组件
-  import commonTextInput from '@/components/commonTextInput';
-  import commonSelector from '@/components/commonSelector';
+  import commonTextInput from '@/components/common/commonTextInput';
+  import commonSelector from '@/components/common/commonSelector';
 
   let SEARCH_OBJ = {};                                                   // 搜查对象
 

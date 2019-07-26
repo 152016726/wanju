@@ -25,7 +25,7 @@
         <commonTextInput v-model="SFZJH" :text="'身份证号'" :isDisabled="isEditInfo || isDisabled" :errorTips="'身份证号码格式错误'"
                          :errorState="SFZJHState"></commonTextInput>
         <commonTextInput v-model="MZMC" :text="'民族'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
-        <commonTextInput v-model="signName" :text="'签约人姓名'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
+        <commonTextInput v-model="XM" :text="'签约人姓名'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
       </div>
       <div class="col-4 item fl">
         <commonTextInput v-model="ZRYSMC" :text="'责任医生'" :isDisabled="isEditInfo || isDisabled"></commonTextInput>
@@ -105,9 +105,9 @@
 </template>
 
 <script>
-  import commonTextInput from './commonTextInput';             // 公共输入框
-  import commonAreaSelector from './commonAreaSelector';       // 地址选择
-  import commonDatePicker from './commonDatePicker';            // 日期选择
+  import commonTextInput from './common/commonTextInput';             // 公共输入框
+  import commonAreaSelector from './common/commonAreaSelector';       // 地址选择
+  import commonDatePicker from './common/commonDatePicker';            // 日期选择
   import {identityCodeValid} from '@/common/js/util';          // 身份证获取生日年龄方法
   export default {
     name: "assignBaseInfo",
@@ -119,6 +119,7 @@
     data() {
       return {
         isEditInfo: true,             // 是否可以编辑信息
+        JKDAID: '',                   // 健康档案Id
         JDJGMC: '',                   // 建档单位
         YHZGXMC: '',                  // 关系
         XB: '',                       // 性别
@@ -196,190 +197,29 @@
       Object.assign(this, this.memberInfo)
     },
     methods: {
+      /**
+       * 编辑/保存健康档案
+       */
       changeEditState() {
+        const {JKDAID} = this;
         this.isEditInfo = !this.isEditInfo;
+        // 如果是点击的保存
+        if(this.isEditInfo){
+          this.$post('family/sign/order/updateSignHealth', {JKDAID, }).then(rsp=>{
+
+          }, rej=>{
+            if(rej.data.errcode === 460){
+              this.$message.error(rej.data.datas[0].message);
+            }else{
+              this.$message.error(rej.data.errmsg);
+            }}
+          )
+        }
       }
     }
   }
 </script>
 
 <style lang="scss">
-  @media screen and (max-width: 1300px){
-    // 基本资料
-    .assignBaseInfo .assignBaseInfoInput .item {
-      .commonTextInput, .commonDatePicker, .commonSelector{
-        .iconText{
-          width: 107px;
-        }
-        .inputType, .datepicker, .selection{
-          width: 170px;
-        }
-      }
-      &.col-3{
-        .iconText{
-          width: 120px;
-        }
-      }
-      &.col-4{
-        .iconText{
-          width: 135px;
-        }
-      }
-    }
-    // 地址
-    .assignBaseInfo .contentAddress .commonAreaSelector{
-        .address{
-          .commonTextInput .commonTextInputContent .inputType{
-            width: 200px;
-          }
-        }
-      .areaSelectorTitle{
-        width: 107px!important;
-      }
-    }
-    // 个人病史
-    .assignBaseInfo .assignPersonInfo .illnessHistory .commonTextInput .iconText{
-        width: 88px;
-    }
-    .assignBaseInfo .assignHomeInfo .assignHomeContent .commonTextInput:nth-child(4n){
-      margin-right: 30px !important;
-    }
-  }
-  .assignBaseInfo {
-    &.borderBottom {
-      border-bottom: 1px solid #DDDDDD;
-    }
-
-    .assignBaseHeader {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 15px;
-      padding-bottom: 19px;
-
-      .major {
-        width: 80px;
-        height: 30px;
-        padding: 0 0;
-        margin: 0 0;
-
-        span {
-          line-height: 30px;
-        }
-      }
-
-      .assignBaseInfoTitle {
-        text-align: left;
-        font-weight: bold;
-        font-size: 18px;
-      }
-    }
-
-
-    .assignBaseInfoInput {
-      .col-1 {
-        margin-right: 15px;
-
-        .iconText {
-          width: 75px;
-        }
-      }
-
-      .col-2 {
-        margin-right: 15px;
-
-        .iconText {
-          width: 75px;
-        }
-      }
-
-      .col-3 {
-        margin-right: 14px;
-
-        .iconText {
-          width: 90px;
-        }
-      }
-
-      .col-4 {
-        .iconText {
-          width: 107px;
-        }
-      }
-    }
-
-    .contentAddress{
-      .commonAreaSelector .areaSelectorTitle{
-          width: 75px;
-          text-align: right;
-      }
-    }
-
-    .assignPersonInfo {
-      .assignPersonInfoTitle {
-        padding: 8px 0;
-        text-align: left;
-        font-weight: bold;
-        font-size: 18px;
-      }
-
-      .illnessHistory {
-        display: flex;
-
-        .commonTextInput {
-          margin-right: 46px;
-        }
-
-        .iconText {
-          width: 65px;
-        }
-      }
-
-      .assignPersonInfoSubTitle {
-        text-indent: 17px;
-        text-align: left;
-        padding-bottom: 20px;
-        font-size: 16px;
-      }
-
-      .illnessInfo {
-        display: flex;
-
-        .iconText {
-          width: 65px;
-        }
-
-        > div {
-          margin-right: 46px;
-        }
-      }
-    }
-
-    .assignHomeInfo {
-      .assignHomeInfoTitle {
-        padding: 8px 0;
-        text-align: left;
-        font-weight: bold;
-        font-size: 18px;
-      }
-
-      .assignHomeContent {
-        display: flex;
-        flex-wrap: wrap;
-
-        .commonTextInput {
-          margin-right: 30px;
-
-          &:nth-child(2) {
-            margin-right: 10px;
-          }
-
-          &:nth-child(4n) {
-            margin-right: 0;
-          }
-        }
-      }
-    }
-
-  }
+@import "../style/assignBaseInfo.scss";
 </style>

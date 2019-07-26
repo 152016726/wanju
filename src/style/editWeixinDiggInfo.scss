@@ -1,0 +1,117 @@
+@media screen and (max-width: 1300px) {
+  .editWeixinDiggInfo {
+    .commonSelector, .commonAutocomplete {
+      .iconText {
+        width: 90px;
+      }
+    }
+  }
+  .editWeixinDiggInfo .editor .ck-reset_all {
+    > div:nth-child(1) {
+      width: 120px;
+
+      .ck-button__label {
+        width: 80px;
+      }
+    }
+  }
+}
+
+.editWeixinDiggInfo {
+  padding: 25px 60px;
+
+  .iconText {
+    width: 75px;
+    text-align: right;
+  }
+
+  &.toggle {
+    .iconText {
+      /*width: px;*/
+      width: auto;
+      text-align: right;
+    }
+  }
+
+  .plateContent {
+    width: 1234px;
+    font-size: 16px;
+    line-height: 38px;
+    border-bottom: 1px solid #DDDDDD;
+
+    &.active {
+      border-bottom: 1px solid #4486FF;
+    }
+
+    .plateTitle {
+      input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: #BABABA;
+      }
+
+      input:-moz-placeholder, textarea:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: #BABABA;
+      }
+
+      input::-moz-placeholder, textarea::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: #BABABA;
+      }
+
+      input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: #BABABA;
+      }
+    }
+  }
+
+  .addSurface {
+    padding-top: 20px;
+    margin-bottom: 30px;
+
+    .surfaceText {
+      font-size: 16px;
+      padding: 9px 0;
+
+      i {
+        color: #F65860;
+        font-size: 12px;
+      }
+    }
+
+    .avatar-uploader .el-upload {
+      border: 1px solid #DDDDDD;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-uploader-icon {
+      font-size: 28px;
+      color: #8c939d;
+      width: 160px;
+      height: 160px;
+      line-height: 160px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      display: block;
+    }
+  }
+
+  .editor {
+    border: 1px solid #DDDDDD;
+  }
+
+  .ck-editor__editable {
+    min-height: 446px;
+    border: 1px solid #DDDDDD;
+  }
+
+
+}

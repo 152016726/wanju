@@ -67,10 +67,10 @@
 
 <script>
   import assignAlertDialog from '@/components/assignAlertDialog';
-  import commonTextInput from '@/components/commonTextInput';
-  import commonSelector from '@/components/commonSelector';
-  import commonCascader from '@/components/commonCascader';
-  import commonAutocomplete from '@/components/commonAutocomplete';
+  import commonTextInput from '@/components/common/commonTextInput';
+  import commonSelector from '@/components/common/commonSelector';
+  import commonCascader from '@/components/common/commonCascader';
+  import commonAutocomplete from '@/components/common/commonAutocomplete';
 
   export default {
     name: "editWeixinDiggList",
@@ -292,131 +292,5 @@
 </script>
 
 <style lang="scss">
-  @media screen and (max-width: 1300px){
-    .editWeixinDiggList .editWeixinDiggListContent{
-      .teamIntro, .commonAutocomplete, .commonTextInput, .uploadText,.commonSelector {
-        .iconText, .intro{
-          width: 140px;
-        }
-      }
-    }
-  }
-  .editWeixinDiggList {
-    padding: 0 83px;
-
-    .editWeixinDiggListTitle {
-      font-size: 18px;
-      font-weight: bold;
-      padding: 24px 0;
-    }
-
-    .iconText {
-      width: 120px;
-      text-align: right;
-    }
-
-    .teamIntro {
-
-      .intro {
-        width: 120px;
-        margin-right: 10px;
-        text-align: right;
-        vertical-align: middle;
-
-        &.center {
-          margin-top: 72px;
-        }
-      }
-
-      .el-textarea__inner, .textArea {
-        width: 740px;
-        height: 160px;
-
-        .el-input__count {
-          color: #F65860;
-        }
-      }
-
-      .teamMember {
-        .codeTips {
-          color: #F65860;
-          font-size: 12px;
-          line-height: 30px;
-        }
-
-        .avatar-uploader .el-upload {
-          border: 1px solid #DDDDDD;
-          border-radius: 6px;
-          cursor: pointer;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .avatar-uploader-icon {
-          font-size: 28px;
-          color: #8c939d;
-          width: 160px;
-          height: 160px;
-          line-height: 160px;
-          text-align: center;
-        }
-
-        .avatar {
-          width: 160px;
-          height: 160px;
-          display: block;
-        }
-
-        /*.addTeamMember {*/
-        /*cursor: pointer;*/
-        /*width: 160px;*/
-        /*height: 160px;*/
-        /*background: url("../assets/btn_add_big.png") no-repeat center center;*/
-        /*background-size: cover;*/
-        /*}*/
-      }
-    }
-
-    .uploadText {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-
-      .iconText {
-        margin-right: 10px;
-      }
-    }
-
-    .uploadBtn {
-      cursor: pointer;
-      border-radius: 6px;
-      padding: 0 10px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      color: #BABABA;
-      border: 1px solid #DDDDDD;
-      box-sizing: border-box;
-      display: block;
-    }
-
-    .txtLoad {
-      margin: 0 0 20px 130px;
-      padding: 0 0;
-      border: none;
-      height: 20px;
-      line-height: 20px;
-      text-indent: 20px;
-      text-align: left;
-      background: url("../assets/ic_txt.png") no-repeat center left;
-      background-size: contain;
-    }
-
-    .stateSelector {
-      .selection, .el-input__inner {
-        width: 100px;
-        height: 30px;
-      }
-    }
-  }
+@import '../style/editWeixinDiggList.scss';
 </style>

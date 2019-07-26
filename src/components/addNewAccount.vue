@@ -121,9 +121,9 @@
 </template>
 
 <script>
-  import commonTextInput from './commonTextInput';
-  import commonSelector from './commonSelector';
-  import commonCascader from './commonCascader';
+  import commonTextInput from './common/commonTextInput';
+  import commonSelector from './common/commonSelector';
+  import commonCascader from './common/commonCascader';
   import assignAlertDialog from '@/components/assignAlertDialog';                  // 通过/拒绝弹窗组件
 
   const SPECIAL_ROLE = [3, 4, 5];     // 省市区的roleType
@@ -385,135 +385,5 @@
 </script>
 
 <style lang="scss">
-  @media screen and (max-width: 1300px){
-    .addNewAccount .addNewAccountContent{
-      .commonTextInput, .commonCascader, .commonSelector{
-        .iconText{
-          width: 90px;
-        }
-      }
-    }
-  }
-  .addNewAccount {
-    .assignDialogTitle {
-      width: 100%;
-      color: #ffffff;
-      font-size: 18px;
-      line-height: 40px;
-      text-align: center;
-      background-color: #4486FF;
-      position: relative;
-
-      .closeIcon {
-        font-size: 24px;
-        cursor: pointer;
-        color: #ffffff;
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-
-    .addNewAccountContent {
-      padding: 0 80px;
-      background-color: #ffffff;
-      text-align: center;
-
-      .accountTitle {
-        text-align: left;
-        font-weight: bold;
-        font-size: 18px;
-        padding-top: 28px;
-        padding-bottom: 20px;
-      }
-
-      .iconText {
-        font-size: 16px;
-        width: 75px;
-        text-align: right;
-      }
-
-      .checkPwd {
-        height: 60px;
-
-        .iconText {
-          font-size: 16px;
-          width: 75px;
-          text-align: right;
-        }
-
-        .openPwd {
-          margin-left: 10px;
-          line-height: 30px;
-          color: #4486FF;
-          font-size: 16px;
-        }
-      }
-
-      .avatarUploader {
-        display: flex;
-        align-items: center;
-        margin-bottom: 23px;
-
-        .avatar-uploader .el-upload {
-          border: 2Px solid #DDDDDD;
-          border-radius: 50%;
-          cursor: pointer;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .avatar-uploader .el-upload:hover {
-          border-color: #409EFF;
-        }
-
-        .avatar-uploader {
-          margin-left: 10px;
-        }
-
-        .avatar-uploader-icon {
-          font-size: 28px;
-          color: #8c939d;
-          width: 60px;
-          height: 60px;
-          line-height: 60px;
-          text-align: center;
-        }
-
-        .avatar {
-          width: 60px;
-          height: 60px;
-          display: block;
-        }
-
-        .tips {
-          color: #F65860;
-          font-size: 12px;
-          margin-left: 10px;
-        }
-      }
-
-      .accountFooter {
-        display: inline-block;
-        padding-bottom: 40px;
-
-        .el-button {
-          margin: 0 10px;
-          padding: 0 0;
-          width: 86px;
-          height: 30px;
-          font-size: 16px;
-        }
-      }
-    }
-
-    .paddingBox {
-      padding-bottom: 0;
-
-      .iconText {
-        width: 75px;
-      }
-    }
-  }
+ @import '../style/addNewAccount.scss';
 </style>

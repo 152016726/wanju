@@ -138,11 +138,11 @@
 </template>
 
 <script>
-  import commonDialog from './commonDialog';                             // 公共弹窗
+  import commonDialog from './common/commonDialog';                             // 公共弹窗
   import assignChargeInfo from './assignChargeInfo';                     // 费用详情弹窗
   import assignAlertDialog from './assignAlertDialog';                  // 通过/拒绝弹窗组件
-  import commonSelector from './commonSelector';                        // 公共选择器
-  import commonTextArea from './commonTextArea';
+  import commonSelector from './common/commonSelector';                        // 公共选择器
+  import commonTextArea from './common/commonTextArea';
   import pdfPrint from '@/components/pdfPrint';                          // pdf打印组件
 
   const APPROVAL_LIST = [0, 1, 2];                                // 可以展示审批的字段
@@ -299,122 +299,5 @@
 </script>
 
 <style lang="scss">
-  .assignSignerInfo {
-    .paddingBox {
-      padding: 30px 0;
-    }
-    .myIframe{
-      height: 0;
-    }
-
-    .nonePaddingBottom {
-      padding-bottom: 0;
-
-      .commonSelector {
-        display: flex;
-        line-height: 30px;
-
-        .iconText {
-          width: 80px;
-          text-align: right;
-        }
-      }
-    }
-
-    .assignSignerTitle {
-      text-align: left;
-      font-weight: bold;
-      font-size: 18px;
-      padding-top: 28px;
-      padding-bottom: 20px;
-    }
-
-    .signServiceInfo {
-      display: table;
-      border-top: 1px solid #DDDDDD;
-      border-left: 1px solid #DDDDDD;
-      box-sizing: border-box;
-
-      .serviceTableRow {
-        display: table-row;
-
-        .serviceTableCell {
-          height: 50px;
-          line-height: 50px;
-          text-align: center;
-          font-size: 16px;
-          border-right: 1px solid #DDDDDD;
-          border-bottom: 1px solid #DDDDDD;
-          box-sizing: border-box;
-          display: table-cell;
-
-          &.name {
-            width: 114px;
-          }
-
-          &.detail {
-            width: 1178px;
-            text-align: left;
-            text-indent: 23px;
-          }
-
-          .lookDetail {
-            color: #29CB97;
-            margin-left: 11px;
-          }
-
-          .print {
-            color: #4486FF;
-            opacity: 0.3;
-            .printing{
-              height: 16px;
-              width: 16px;
-              display: inline-block;
-              vertical-align: middle;
-              background: url("../assets/ic_printing_on.png") no-repeat;
-              background-size: contain;
-            }
-            .printed{
-              height: 16px;
-              width: 16px;
-              display: inline-block;
-              vertical-align: middle;
-              background: url("../assets/ic_printing_off.png") no-repeat;
-              background-size: contain;
-            }
-
-            &.highlight {
-              opacity: 1;
-            }
-          }
-        }
-      }
-    }
-
-    .btns {
-      padding: 30px 0;
-      text-align: left;
-
-      .major {
-        margin-right: 20px !important;
-        background-color: #4486ff;
-      }
-      .reject{
-        background-color: #F65860;
-      }
-
-      .el-button {
-        padding: 0 0;
-        margin: 0 0;
-        width: 86px;
-        height: 30px;
-        line-height: 30px;
-      }
-      .refused, .canceled, .retracted, .overTimed {
-        color: #F65860;
-        line-height: 30px;
-      }
-    }
-
-  }
+ @import "../style/assignSignerInfo.scss";
 </style>

@@ -1,0 +1,63 @@
+.commonDialog {
+  width: 100%;
+
+  .tag {
+    cursor: pointer;
+    color: #4486FF;
+    line-height: 20px;
+    font-size: 16px;
+    text-align: center;
+
+    .icon {
+      height: 20px;
+      width: 20px;
+      /*background-color: #4486FF;*/
+      margin-right: 5px;
+      display: inline-block;
+      vertical-align: middle;
+      background-size: contain;
+    }
+  }
+
+  .mc {
+    .mask {
+      cursor: pointer;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      opacity: .5;
+    }
+
+    .outContent {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      >div{
+        max-height: 100vh;
+        -ms-scroll-chaining: chained;
+        -ms-overflow-style: none;
+        -ms-content-zooming: zoom;
+        -ms-scroll-rails: none;
+        -ms-content-zoom-limit-min: 100%;
+        -ms-content-zoom-limit-max: 500%;
+        -ms-scroll-snap-type: proximity;
+        -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+        -ms-overflow-style: none;
+        overflow-y: auto;
+        background: #fff;
+        &::-webkit-scrollbar {
+          width:0px;
+          height:0px;
+        }
+        &.-o-scrollbar{
+          -moz-appearance: none !important;
+          background: rgba(0,255,0,0) !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,196 @@
+* {
+  box-sizing: border-box;
+}
+
+@page {
+  size: a4;
+  //margin-top: 0;
+  //margin-bottom: 0;
+  orphans: 4;
+  widows: 2;
+}
+
+//@media print { margin-top: 5mm; margin-bottom: 5mm;}
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+table {
+  margin: auto;
+  border-bottom: none;
+  border-left: none;
+  font-family: SimSun;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.a4 {
+  font-size: 4mm;
+  font-family: SimHei;
+  color: #262626;
+  background-color: aliceblue;
+  margin: 0 auto;
+  width: 279mm;
+  height: 216mm;
+}
+
+.title {
+  padding: 10mm 0;
+  font-size: 8mm;
+  font-weight: bold;
+  text-align: center;
+}
+
+.sign-begin p, .sign-content-1 p, .sign-content-2 p, .sign-content-3 p, .sign-member p {
+  line-height: 10mm;
+}
+
+.idCard, .response-doctor, .left-time {
+  margin-right: 100mm;
+}
+
+.sign-content-1 {
+  margin: 5mm 0;
+}
+
+.service-item {
+  padding-top: 5mm;
+}
+
+.servicePackage {
+  min-height: 50mm;
+}
+
+.sign-content-3 {
+  margin: 10mm 0;
+}
+
+.left-common-check {
+  padding-top: 20mm;
+  padding-bottom: 30mm;
+}
+
+.signer, .sign-time {
+  padding-bottom: 30mm;
+}
+
+.signer {
+  padding-top: 5mm;
+}
+
+.year {
+  width: 10mm;
+  display: inline-block;
+}
+
+.month, .day {
+  width: 5mm;
+  display: inline-block;
+}
+
+.contract-time, .contract-reason {
+  padding-bottom: 10mm;
+}
+
+.contract-signer {
+  padding-bottom: 30mm;
+}
+
+.services {
+  margin: 0 10mm;
+}
+
+.servicePackages {
+  width: 100%;
+  border: 1px solid #262626;
+  border-collapse: collapse;
+}
+
+.servicePackages th, .servicePackages td {
+  border: 1px solid #262626;
+  padding: 2mm;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.order {
+  width: 10%;
+}
+
+.category {
+  width: 30%;
+}
+
+.service-num {
+  width: 10%;
+}
+
+.service-explain {
+  width: 40%;
+}
+
+.note {
+  width: 10%;
+}
+
+.servicePackages .description {
+  text-align: left;
+}
+
+.family-member {
+  margin: 0 10mm;
+  min-height: 50mm;
+}
+
+.family-member-table {
+  width: 100%;
+  border: 1px solid #262626;
+  border-collapse: collapse;
+}
+
+.family-member-table th, .family-member-table td {
+  border: 1px solid #262626;
+  line-height: 10mm;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.index {
+  width: 10%;
+}
+
+.relation {
+  width: 20%;
+}
+
+.name {
+  width: 10%;
+}
+
+.gender {
+  width: 10%;
+}
+
+.idCard {
+  width: 30%;
+}
+
+.category {
+  width: 20%;
+}
+
+.decoration {
+  text-decoration: underline;
+}
+
+.sign-member-content {
+  padding: 5mm 0;
+}
+
+.sign-check {
+  padding-top: 5mm;
+}

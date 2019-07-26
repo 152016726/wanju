@@ -104,11 +104,11 @@
 </template>
 
 <script>
-  import commonTextInput from '@/components/commonTextInput';
-  import commonSelector from '@/components/commonSelector';
+  import commonTextInput from '@/components/common/commonTextInput';
+  import commonSelector from '@/components/common/commonSelector';
   import assignAlertDialog from '@/components/assignAlertDialog';                  // 通过/拒绝弹窗组件
-  import commonDialog from '@/components/commonDialog';                            // 公共弹窗
-  import commonDatePicker from '@/components/commonDatePicker';                    // 日期插件
+  import commonDialog from '@/components/common/commonDialog';                            // 公共弹窗
+  import commonDatePicker from '@/components/common/commonDatePicker';                    // 日期插件
   import editWeixinDiggInfo from '@/components/editWeixinDiggInfo';                // 编辑公众号内容弹窗
   export default {
     name: "weixinDiggInfo",

@@ -123,13 +123,13 @@
 </template>
 
 <script>
-  import commonTextInput from '@/components/commonTextInput';
-  import commonSelector from '@/components/commonSelector';
+  import commonTextInput from '@/components/common/commonTextInput';
+  import commonSelector from '@/components/common/commonSelector';
   import assignAlertDialog from '@/components/assignAlertDialog';                  // 通过/拒绝弹窗组件
   import addNewTeam from '@/components/addNewTeam';                                // 新增团队
-  import commonDialog from '@/components/commonDialog';                            // 公共弹窗
+  import commonDialog from '@/components/common/commonDialog';                            // 公共弹窗
   import addNewTeamMember from '@/components/addNewTeamMember';                   // 添加团队成员
-  import commonTextArea from '@/components/commonTextArea';                       // 文本输入框
+  import commonTextArea from '@/components/common/commonTextArea';                       // 文本输入框
 
   let SEARCH_OBJ = {};                                                            // 搜查对象
 

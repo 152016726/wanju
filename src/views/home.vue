@@ -158,7 +158,7 @@
 </template>
 
 <script>
-  import commonDialog from '@/components/commonDialog';
+  import commonDialog from '@/components/common/commonDialog';
   import homeChooseTeam from '@/components/homeChooseTeam';
   import homeChooseDoctor from '@/components/homeChooseDoctor';
   import echarts from 'echarts';

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import commonTextInput from './commonTextInput';             // 公共输入框
+  import commonTextInput from './common/commonTextInput';             // 公共输入框
   export default {
     name: "assignHomeInfo",
     components: {
@@ -29,12 +29,5 @@
 </script>
 
 <style lang="scss">
-  .assignHomeInfo {
-    .assignHomeInfoTitle {
-      padding: 8px 0;
-      text-align: left;
-      font-weight: bold;
-      font-size: 18px;
-    }
-  }
+ @import '../style/assignHomeInfo.scss';
 </style>

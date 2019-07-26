@@ -1,0 +1,40 @@
+.servicePackages {
+  .assignSignerTitle {
+    cursor: pointer;
+    text-align: left;
+    border: 1px solid #DDDDDD;
+    border-top: none;
+    display: flex;
+    align-items: center;
+    height: 54px;
+    box-sizing: border-box;
+    text-indent: 20px;
+    &.borderActive{
+      border-bottom: none;
+    }
+    &.borderTop{
+      border-top: 1px solid #DDDDDD;
+    }
+    &.borderNone{
+      border: none;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .icon {
+      margin-left: 13px;
+      width: 9px;
+      height: 6px;
+      background: url("../../assets/btn_open_gray.png") no-repeat center center;
+      background-size: cover;
+      transition: all 0.3s;
+
+      &.pull {
+        transform: rotateX(180deg);
+      }
+    }
+  }
+}
